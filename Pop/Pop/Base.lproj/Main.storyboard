@@ -61,6 +61,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="YxT-gv-yc5" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bDU-kk-pcg">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -74,10 +75,10 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="132.58928571428572"/>
         </scene>
-        <!--View Controller-->
+        <!--Album Detail View Controller-->
         <scene sceneID="d6s-5L-xhn">
             <objects>
-                <viewController id="YiG-aV-FLz" sceneMemberID="viewController">
+                <viewController id="YiG-aV-FLz" customClass="AlbumDetailViewController" customModule="Pop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5cq-rB-UHD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

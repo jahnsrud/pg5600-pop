@@ -14,6 +14,7 @@
 		28AC33EE2367342F003F3D4D /* Pop.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28AC33EC2367342F003F3D4D /* Pop.xcdatamodeld */; };
 		28AC33F023673433003F3D4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28AC33EF23673433003F3D4D /* Assets.xcassets */; };
 		28AC33F323673433003F3D4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28AC33F123673433003F3D4D /* LaunchScreen.storyboard */; };
+		28AC33FC23676F6A003F3D4D /* AlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AC33FB23676F6A003F3D4D /* AlbumDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		28AC33EF23673433003F3D4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28AC33F223673433003F3D4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28AC33F423673433003F3D4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28AC33FB23676F6A003F3D4D /* AlbumDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				28AC33E32367342F003F3D4D /* AppDelegate.swift */,
 				28AC33E52367342F003F3D4D /* SceneDelegate.swift */,
+				28AC33FA23676F54003F3D4D /* View Controllers */,
 				28AC33E72367342F003F3D4D /* ViewController.swift */,
 				28AC33E92367342F003F3D4D /* Main.storyboard */,
 				28AC33EF23673433003F3D4D /* Assets.xcassets */,
@@ -68,6 +71,14 @@
 				28AC33EC2367342F003F3D4D /* Pop.xcdatamodeld */,
 			);
 			path = Pop;
+			sourceTree = "<group>";
+		};
+		28AC33FA23676F54003F3D4D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				28AC33FB23676F6A003F3D4D /* AlbumDetailViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +154,7 @@
 			files = (
 				28AC33E82367342F003F3D4D /* ViewController.swift in Sources */,
 				28AC33E42367342F003F3D4D /* AppDelegate.swift in Sources */,
+				28AC33FC23676F6A003F3D4D /* AlbumDetailViewController.swift in Sources */,
 				28AC33E62367342F003F3D4D /* SceneDelegate.swift in Sources */,
 				28AC33EE2367342F003F3D4D /* Pop.xcdatamodeld in Sources */,
 			);
