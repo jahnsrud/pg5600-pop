@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="19A602" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Album" representedClassName="Album" syncable="YES" codeGenerationType="class"/>
-    <entity name="Artist" representedClassName="Artist" syncable="YES" codeGenerationType="class"/>
-    <entity name="Track" representedClassName="Track" syncable="YES" codeGenerationType="class"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Favorite" representedClassName="Favorite" syncable="YES" codeGenerationType="class">
+        <attribute name="albumArtUrl" optional="YES" attributeType="String"/>
+        <attribute name="artist" optional="YES" attributeType="String"/>
+        <attribute name="duration" optional="YES" attributeType="String"/>
+        <attribute name="track" optional="YES" attributeType="String"/>
+        <attribute name="trackId" optional="YES" attributeType="String"/>
+        <attribute name="videoUrl" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
-        <element name="Album" positionX="-63" positionY="-18" width="128" height="43"/>
-        <element name="Artist" positionX="-54" positionY="-9" width="128" height="43"/>
-        <element name="Track" positionX="-36" positionY="9" width="128" height="43"/>
+        <element name="Favorite" positionX="-63" positionY="-18" width="128" height="133"/>
     </elements>
 </model>
