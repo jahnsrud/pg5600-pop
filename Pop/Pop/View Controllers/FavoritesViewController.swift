@@ -18,7 +18,12 @@ class FavoritesViewController: UIViewController {
     @IBOutlet weak var emptyStateLabel: UILabel!
     
     var favorites = [Favorite]()
-    var suggestedArtists = [Artist]()
+    var suggestedArtists = [SuggestedArtist]()
+    
+    var fetchedResultsController: NSFetchedResultsController<Favorite>!
+    
+    let dbManager = DatabaseManager.sharedInstance
+    let context = DatabaseManager.sharedInstance.persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,23 +33,6 @@ class FavoritesViewController: UIViewController {
         
         suggestionsView.dataSource = self
         suggestionsView.delegate = self
-        
-        /*
-         var testFav = Favorite(context: DatabaseManager.init().persistentContainer.viewContext)
-         
-         testFav.artist = "test.Artist"
-         testFav.track = "test.Track"
-         testFav.duration = "123456"
-         testFav.albumArtUrl = "https://is4-ssl.mzstatic.com/image/thumb/Music118/v4/18/82/00/18820086-ad63-b51e-f562-d455d6cb8625/source/1200x1200bb.jpg"
-         testFav.videoUrl = "https://is4-ssl.mzstatic.com/image/thumb/Music118/v4/18/82/00/18820086-ad63-b51e-f562-d455d6cb8625/source/1200x1200bb.jpg"
-         
-         favorites.append(testFav)
-         */
-        
-        suggestedArtists.append(Artist(name: "test.Artist", artistId: "000"))
-        suggestedArtists.append(Artist(name: "test.cool", artistId: "111"))
-        suggestedArtists.append(Artist(name: "test.nice", artistId: "222"))
-        suggestedArtists.append(Artist(name: "test.yes", artistId: "333"))
         
         // Our TableView
         tableView.register(UINib(nibName: "FavoriteTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
@@ -68,18 +56,29 @@ class FavoritesViewController: UIViewController {
         
         // TODO: Improve
         
-        let dbManager = DatabaseManager()
-        let context = dbManager.persistentContainer.viewContext
-                        
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
+        let sort = NSSortDescriptor(key: #keyPath(Favorite.track), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        
         do {
-            favorites.removeAll()
-            favorites = try context.fetch(fetchRequest) as! [Favorite]
+            fetchedResultsController = (NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil) as! NSFetchedResultsController<Favorite>)
+            try fetchedResultsController.performFetch()
+            fetchedResultsController.delegate = self
+            
         } catch let error as NSError {
-            print("Error: \(error.localizedDescription)")
+            print("Could not fetch. \(error), \(error.userInfo)")
         }
         
-        self.tableView.reloadData(animated: true)
+        
+        /*
+         do {
+         favorites.removeAll()
+         favorites = try context.fetch(fetchRequest) as! [Favorite]
+         } catch let error as NSError {
+         print("Error: \(error.localizedDescription)")
+         }
+         
+         self.tableView.reloadData(animated: true)*/
         
     }
     
@@ -91,14 +90,16 @@ class FavoritesViewController: UIViewController {
     
     func deleteFavorite(at: IndexPath) {
         
-        let favorite = favorites[at.row]
+        // TODO: Improve
         
-        let alert = UIAlertController(title: "Delete \(favorite.track)?", message: "This track will be removed from your favorites", preferredStyle: .actionSheet)
+        let favorite = fetchedResultsController.object(at: at)
+        
+        let alert = UIAlertController(title: "Delete \(favorite.track ?? "track")?", message: "This track will be removed from your favorites", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
             
+            self.context.delete(favorite)
+            self.dbManager.saveContext()
             
-            // TODO: Delete
-            self.favorites.remove(at: 0)
             self.tableView.reloadData(animated: true)
             
             
@@ -132,44 +133,76 @@ class FavoritesViewController: UIViewController {
         
     }
     
+    // Gets the current artists and outputs a string with all artists
+    // Formatted for the following API
+    // https://tastedive.com/read/api
+    func getArtistsFormatted() -> String {
+        
+        guard let mFavorites = fetchedResultsController.fetchedObjects else { return "" }
+        
+        // TODO: Convert to map,something
+        
+        var query:String = ""
+        
+        for favorite in mFavorites {
+            if var artist = favorite.artist {
+                artist = artist.replacingOccurrences(of: " ", with: "+")
+                query += "\(artist)%2C+"
+            }
+        }
+        
+        // TODO: DOn't unwrap
+        
+        query = query.lowercased()
+        
+        return query
+    }
+    
     func loadSuggestions() {
-        if favorites.count > 0 {
+        // if favorites.count > 0 {
+        
+        print("Loading suggestions based on: \(getArtistsFormatted())")
+        
+        let url = "\(suggestionsApiBaseUrl)similar?q=\(getArtistsFormatted())?type=music"
+        let handler = NetworkHandler()
+        
+        self.suggestedArtists.removeAll()
+        self.suggestionsView.reloadData(animated: true)
+        
+        handler.getData(url: URL(string: url)!, completionHandler: { data, response, error in
             
-            print("Loading suggestions...")
+            if (error != nil) {
+                print("Error: \(error?.localizedDescription)")
+                return
+            }
             
-            let query = "red+hot+chili+peppers%2C+pulp+fiction"
-            let url = "\(suggestionsApiBaseUrl)similar?q=\(query)?type=music"
-            let handler = NetworkHandler()
-            
-            handler.getData(url: URL(string: url)!, completionHandler: { data, response, error in
+            do {
                 
-                do {
-                    /*
-                     
-                     // TODO: Don't force unwrap
-                     let response = try! JSONDecoder().decode(SuggestionsResponse.self, from: data!)
-                     
-                     
-                     for suggestion in response.results {
-                     print(suggestion.suggestions)
-                     // self.albums.append(album)
-                     }
-                     
-                     self.suggestionsView.reloadData(animated: true)
-                     */
+                let response = try JSONDecoder().decode(SuggestionsResponse.self, from: data!)
+                
+                
+                for suggestion in response.similar.results {
+                    print(suggestion)
                     
-                } catch let error {
-                    print(error)
-                    
+                    self.suggestedArtists.append(suggestion)
                 }
                 
-            })
+                self.suggestionsView.reloadData(animated: true)
+                
+                
+                
+            } catch let error {
+                print(error)
+                
+            }
             
-            
-            
-            
-            
-        }
+        })
+        
+        
+        
+        
+        
+        // }
         
     }
     
@@ -191,7 +224,9 @@ class FavoritesViewController: UIViewController {
         
         // Workaround to hide our edit button when nothing is added
         
-        if favorites.count == 0 {
+        guard let mFavorites = fetchedResultsController.fetchedObjects else { return }
+        
+        if mFavorites.count == 0 {
             editBarButtonItem.isEnabled = false
             editBarButtonItem.tintColor = .clear
             emptyStateLabel.isHidden = false
@@ -211,16 +246,24 @@ extension FavoritesViewController: UITableViewDataSource {
         
         displayEmptyState()
         
-        return favorites.count
+        guard let mFavorites = fetchedResultsController.fetchedObjects else { return 0 }
+        
+        return mFavorites.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FavoriteTableViewCell
         
-        let favorite = favorites[indexPath.row]
+        let favorite = fetchedResultsController.object(at: indexPath)
         
         cell.trackLabel.text = favorite.track
-        cell.durationLabel.text = favorite.duration
+        cell.artistLabel.text = favorite.artist
+        
+        if let intDuration = Int(favorite.duration ?? "") {
+            cell.durationLabel.text = intDuration.convertMillisecondsToHumanReadable()
+        } else {
+            cell.durationLabel.text = ""
+        }
         
         cell.albumArtView.kf.setImage(with: URL(string: favorite.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
         
@@ -237,7 +280,9 @@ extension FavoritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let favorite = favorites[indexPath.row]
+        guard let mFavorites = fetchedResultsController.fetchedObjects else { return }
+        
+        let favorite = mFavorites[indexPath.row]
         openFavorite(favorite)
         
     }
@@ -258,12 +303,16 @@ extension FavoritesViewController: UITableViewDelegate {
         
         print("MOVe IT!")
         
+        // Update all favorites with new ID
+        
+        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
             deleteFavorite(at: indexPath)
+            
             
         }
     }
@@ -277,34 +326,35 @@ extension FavoritesViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ArtistCell
         
         let artist = suggestedArtists[indexPath.item]
         
         cell.artistLabel.text = artist.name
         
-        cell.imageView.image = #imageLiteral(resourceName: "icon-grid")
+        cell.imageView.image = #imageLiteral(resourceName: "placeholder-album")
         cell.imageView.layer.cornerRadius = cell.imageView.bounds.size.width/2
         cell.imageView.layer.masksToBounds = true
-        cell.imageView.backgroundColor = .orange
+        cell.imageView.backgroundColor = .blue
         
         return cell
     }
-    
-    
     
     
 }
 
 extension FavoritesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let artist = suggestedArtists[indexPath.item]
         
-        let vc = storyboard?.instantiateViewController(identifier: "ArtistVC") as! ArtistViewController
-        vc.artist = artist
-        navigationController?.pushViewController(vc, animated: true)
+        // TODO: FIX
         
+        /*
+         let vc = storyboard?.instantiateViewController(identifier: "ArtistVC") as! ArtistViewController
+         vc.artist = artist
+         navigationController?.pushViewController(vc, animated: true)
+         */
         
     }
 }
@@ -314,4 +364,24 @@ extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: 200, height: 100)
     }
     
+}
+
+
+// https://medium.com/@KentaKodashima/ios-core-data-tutorial-part-2-41f6740865d5s
+extension FavoritesViewController: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        let index = indexPath ?? (newIndexPath ?? nil)
+        guard let cellIndex = index else { return }
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [cellIndex], with: .fade)
+        default:
+            break
+        }
+        
+        // Update our artist suggestions when data changes
+        loadSuggestions()
+    }
 }

@@ -11,7 +11,9 @@ import CoreData
 
 class DatabaseManager {
     
-    init() {
+    static let sharedInstance = DatabaseManager()
+    
+    private init() {
         
     }
     

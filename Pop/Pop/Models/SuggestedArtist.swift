@@ -10,23 +10,27 @@ import Foundation
 
 struct SuggestedArtist: Codable {
     let name: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case name = "Name"
+        
+    }
 }
+
+
 
 struct SuggestionsResponse: Codable {
-    var results: [Suggestions]
+    let similar: Similar
     
-    private enum CodingKeys: String, CodingKey {
-        case results = "Similar"
-        
+    enum CodingKeys: String, CodingKey {
+        case similar = "Similar"
     }
 }
 
-struct Suggestions: Codable {
-    var suggestions: [SuggestedArtist]
-    
-    private enum CodingKeys: String, CodingKey {
-        case suggestions = "Results"
-        
+struct Similar: Codable {
+    let results: [SuggestedArtist]
+
+    enum CodingKeys: String, CodingKey {
+        case results = "Results"
     }
 }
-

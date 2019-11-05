@@ -45,10 +45,15 @@ class TopViewController: UIViewController {
         
         handler.getData(url: URL(string: url)!, completionHandler: { data, response, error in
             
+            if (error != nil) {
+                print("Error: \(error?.localizedDescription)")
+                return
+            }
+            
             do {
                 
                 // TODO: Don't force unwrap
-                let response = try! JSONDecoder().decode(Response.self, from: data!)
+                let response = try JSONDecoder().decode(Response.self, from: data!)
                 
                 for album in response.loved {
                     // print(album.title)
@@ -79,6 +84,11 @@ class TopViewController: UIViewController {
          UserDefaults.standard.set("grid", forKey: "layoutType")
        
         }
+        
+        // Scroll to top to avoid confusion
+        // TODO: Improve
+        
+        collectionView.setContentOffset(CGPoint.zero, animated: true)
         
         print("Switching to \(layoutType)")
         
@@ -163,7 +173,7 @@ extension TopViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if layoutType == .list {
-            return CGSize(width: collectionView.bounds.size.width, height: 90)
+            return CGSize(width: collectionView.bounds.size.width, height: 80)
         } else {
             return CGSize(width: (collectionView.bounds.size.width/2)-16, height: 230)
         }

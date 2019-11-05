@@ -45,7 +45,7 @@ class TrackViewController: UIViewController {
     
     func addOrDeleteFavorite() {
         
-        let dbManager = DatabaseManager()
+        let dbManager = DatabaseManager.sharedInstance
         
         let testFav = Favorite(context: dbManager.persistentContainer.viewContext)
         

@@ -60,11 +60,14 @@ class AlbumViewController: UIViewController {
             
             handler.getData(url: URL(string: url)!, completionHandler: { data, response, error in
                 
-                // TODO: Don't force unwrap
+                if (error != nil) {
+                    print("Error: \(error?.localizedDescription)")
+                    return
+                }
                 
                 do {
                     
-                    let response = try! JSONDecoder().decode(TracksResponse.self, from: data!)
+                    let response = try JSONDecoder().decode(TracksResponse.self, from: data!)
                     
                     for track in response.track {
                         // print("Track: \(track.name)")
@@ -111,11 +114,8 @@ extension AlbumViewController: UITableViewDataSource {
         
         let track = tracks[indexPath.row]
         
-        if let tempDuration = Int(track.duration) {
-            
-            cell.durationLabel.text = tempDuration.convertMillisecondsToHumanReadable()
-            
-            
+        if let intDuration = Int(track.duration) {
+            cell.durationLabel.text = intDuration.convertMillisecondsToHumanReadable()
         } else {
             cell.durationLabel.text = ""
         }

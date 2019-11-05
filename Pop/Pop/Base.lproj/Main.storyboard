@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -114,14 +115,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WvL-qM-g5p">
-                                <rect key="frame" x="0.0" y="535" width="414" height="278"/>
+                                <rect key="frame" x="0.0" y="587" width="414" height="226"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.17173332253886009" green="0.17173332253886009" blue="0.17173332253886009" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" name="AlbumArtBorder"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="n3H-Sn-Xwz">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="64" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="yBv-zi-lxX">
@@ -136,7 +137,7 @@
                                 </cells>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ChT-Sq-iKU">
-                                <rect key="frame" x="0.0" y="88" width="414" height="439"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="498"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="RCl-ZK-mSw" style="IBUITableViewCellStyleDefault" id="1Ul-zZ-8Z6">
@@ -380,7 +381,7 @@
         <scene sceneID="dCN-xc-xxK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HyK-ax-xzD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Top" image="globe" catalog="system" id="J9W-4s-Qsv"/>
+                    <tabBarItem key="tabBarItem" title="Top" image="music.note.list" catalog="system" id="J9W-4s-Qsv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="OEy-Vh-DMj">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -399,7 +400,7 @@
         <scene sceneID="2H6-yh-HQ0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T9v-OS-IyR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorites" image="heart.fill" catalog="system" id="Xjg-id-8Ha"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="star.fill" catalog="system" id="Xjg-id-8Ha"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="k1Z-e7-Rai">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -453,11 +454,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="globe" catalog="system" width="64" height="60"/>
-        <image name="heart.fill" catalog="system" width="64" height="54"/>
         <image name="icon-list" width="33" height="33"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
+        <image name="music.note.list" catalog="system" width="64" height="56"/>
         <image name="placeholder-album" width="333" height="333"/>
+        <image name="star.fill" catalog="system" width="64" height="58"/>
+        <namedColor name="AlbumArtBorder">
+            <color red="0.90700000524520874" green="0.90700000524520874" blue="0.90700000524520874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
     </resources>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

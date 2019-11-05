@@ -62,10 +62,15 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         
         handler.getData(url: URL(string: url)!, completionHandler: { data, response, error in
             
+            if (error != nil) {
+                print("Error: \(error?.localizedDescription)")
+                return
+            }
+            
             do {
                 
                 // TODO: Don't force unwrap
-                let response = try! JSONDecoder().decode(AlbumSearchResponse.self, from: data!)
+                let response = try JSONDecoder().decode(AlbumSearchResponse.self, from: data!)
                 
                 if response.album != nil {
                     for album in response.album! {
