@@ -12,7 +12,8 @@ import Kingfisher
 class SearchViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    var results = [Album]()
+    var albumResults = [Album]()
+    var artistResults = [Artist]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.register(UINib(nibName: "AlbumSearchCell", bundle: nil), forCellReuseIdentifier: "Cell")
+        tableView.register(UINib(nibName: "SearchCell", bundle: nil), forCellReuseIdentifier: "Cell")
         
         configureSearchController()
         
@@ -44,18 +45,28 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     func search(query: String) {
         
-        print("Searching for: \(query)")
-        
         // Clear old results
-        self.results.removeAll()
+        
+        self.albumResults.removeAll()
+        self.artistResults.removeAll()
         
         DispatchQueue.main.async {
-            self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+            self.tableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
         }
         
+        print("Searching for: \(query)")
+        
         guard query.count > 0 else {
+            print("Stopping")
             return
         }
+        
+        searchAlbums(query: query)
+        searchArtists(query: query)
+        
+    }
+    
+    func searchAlbums(query: String) {
         
         let url = "\(musicApiBaseUrl)searchalbum.php?a=\(query)"
         let handler = NetworkHandler()
@@ -75,14 +86,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
                 if response.album != nil {
                     for album in response.album! {
                         print("Found album: \(album.title)")
-                        self.results.append(album)
+                        self.albumResults.append(album)
                     }
                 } else {
                     print("Search: Results are empty")
                 }
                 
                 DispatchQueue.main.async {
-                    self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+                    self.tableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
                 }
                 
                 
@@ -93,7 +104,47 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             
             
         })
+    }
+    
+    func searchArtists(query: String) {
+        print("Searching for: \(query)")
         
+        let url = "\(musicApiBaseUrl)search.php?s=\(query)"
+        let handler = NetworkHandler()
+        
+        handler.getData(url: URL(string: url)!, completionHandler: { data, response, error in
+            
+            if (error != nil) {
+                print("Error: \(error?.localizedDescription)")
+                return
+            }
+            
+            do {
+                
+                let response = try JSONDecoder().decode(ArtistResponse.self, from: data!)
+                
+                if response.artists != nil {
+                    for artist in response.artists! {
+                        print("Found artist: \(artist.name) with \(artist.imageUrl)")
+                        self.artistResults.append(artist)
+                    }
+                } else {
+                    print("Search: Results are empty")
+                }
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
+                    // self.tableView.reloadData()
+                }
+                
+                
+            } catch let error {
+                print(error)
+                
+            }
+            
+            
+        })
     }
     
     func presentAlbum(_ album: Album) {
@@ -107,22 +158,51 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
 }
 
 extension SearchViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return results.count
+        
+        if section == 0 {
+            return albumResults.count
+        }
+                
+        return artistResults.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return results.count > 0 ? "Albums" : ""
+        
+        if section == 0 {
+            return albumResults.count > 0 ? "Albums" : ""
+        } else {
+            return artistResults.count > 0 ? "Artists" : ""
+        }
+        
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! AlbumSearchCell
-        let album = results[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SearchCell
         
-        cell.albumLabel.text = album.title
-        cell.artistLabel.text = album.artist
-        cell.albumArtView.kf.setImage(with: URL(string: album.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
+        if indexPath.section == 0 {
+            let album = albumResults[indexPath.row]
+            
+            cell.titleLabel.text = album.title
+            cell.descriptionLabel.text = album.artist
+            cell.albumArtView.kf.setImage(with: URL(string: album.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
+        } else {
+            let artist = artistResults[indexPath.row]
+            
+            cell.titleLabel.text = artist.name
+            cell.descriptionLabel.text = artist.name
+            cell.albumArtView.kf.setImage(with: URL(string: artist.imageUrl ), placeholder: UIImage(named: "placeholder-album"))
+            
+        }
+        
+        
         
         return cell
     }
@@ -134,8 +214,12 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        let album = results[indexPath.row]
-        presentAlbum(album)
+        
+        if indexPath.section == 0 {
+            let album = albumResults[indexPath.row]
+            presentAlbum(album)
+            
+        }
         
     }
 }

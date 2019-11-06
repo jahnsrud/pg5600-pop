@@ -8,11 +8,11 @@
 
 import UIKit
 
-class AlbumSearchCell: UITableViewCell {
+class SearchCell: UITableViewCell {
     
     @IBOutlet weak var albumArtView: AlbumArtView!
-    @IBOutlet weak var albumLabel: UILabel!
-    @IBOutlet weak var artistLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

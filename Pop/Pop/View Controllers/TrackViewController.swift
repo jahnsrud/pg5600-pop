@@ -47,13 +47,14 @@ class TrackViewController: UIViewController {
         
         let dbManager = DatabaseManager.sharedInstance
         
-        let testFav = Favorite(context: dbManager.persistentContainer.viewContext)
+        let favorite = Favorite(context: dbManager.persistentContainer.viewContext)
         
-        testFav.artist = track?.artist
-        testFav.track = track?.name
-        testFav.duration = track?.duration
-        testFav.albumArtUrl = "COMING_SOON"
-        testFav.videoUrl = track?.videoUrl
+        favorite.artist = track?.artist
+        favorite.track = track?.name
+        favorite.duration = track?.duration
+        favorite.albumArtUrl = track?.albumArtUrl
+        favorite.videoUrl = track?.videoUrl
+        favorite.sortId = 9999
         
         
         dbManager.saveContext()

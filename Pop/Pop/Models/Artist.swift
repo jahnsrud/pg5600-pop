@@ -8,7 +8,19 @@
 
 import Foundation
 
-struct Artist {
+struct Artist: Codable {
     let name: String
     let artistId: String
+    let imageUrl: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case name = "strArtist"
+        case artistId = "idArtist"
+        case imageUrl = "strArtistThumb"
+        
+    }
+}
+
+struct ArtistResponse: Codable {
+    let artists: [Artist]?
 }

@@ -13,17 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        setDefaults()
-        
-        return true
-    }
-    
-    func setDefaults() {
         UserDefaults.standard.register(defaults: [
             "firstLaunch": true,
             "layoutType": "grid",
         ])
+        
+        return true
     }
+  
     
     // MARK: UISceneSession Lifecycle
     

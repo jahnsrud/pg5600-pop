@@ -52,7 +52,6 @@ class TopViewController: UIViewController {
             
             do {
                 
-                // TODO: Don't force unwrap
                 let response = try JSONDecoder().decode(Response.self, from: data!)
                 
                 for album in response.loved {

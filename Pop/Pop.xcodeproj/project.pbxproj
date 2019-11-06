@@ -43,8 +43,8 @@
 		28AC33FC23676F6A003F3D4D /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AC33FB23676F6A003F3D4D /* AlbumViewController.swift */; };
 		28AC33FE2367743E003F3D4D /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AC33FD2367743E003F3D4D /* TopViewController.swift */; };
 		28EBB13C2370B13E0028C2D0 /* AlbumArtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EBB13B2370B13E0028C2D0 /* AlbumArtView.swift */; };
-		28EBB13F2370BF8B0028C2D0 /* AlbumSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EBB13D2370BF8B0028C2D0 /* AlbumSearchCell.swift */; };
-		28EBB1402370BF8B0028C2D0 /* AlbumSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EBB13E2370BF8B0028C2D0 /* AlbumSearchCell.xib */; };
+		28EBB13F2370BF8B0028C2D0 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EBB13D2370BF8B0028C2D0 /* SearchCell.swift */; };
+		28EBB1402370BF8B0028C2D0 /* SearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EBB13E2370BF8B0028C2D0 /* SearchCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,8 +85,8 @@
 		28AC33FB23676F6A003F3D4D /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		28AC33FD2367743E003F3D4D /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
 		28EBB13B2370B13E0028C2D0 /* AlbumArtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumArtView.swift; sourceTree = "<group>"; };
-		28EBB13D2370BF8B0028C2D0 /* AlbumSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumSearchCell.swift; sourceTree = "<group>"; };
-		28EBB13E2370BF8B0028C2D0 /* AlbumSearchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumSearchCell.xib; sourceTree = "<group>"; };
+		28EBB13D2370BF8B0028C2D0 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		28EBB13E2370BF8B0028C2D0 /* SearchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +115,6 @@
 		28303F00236C459400CC9992 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				2805700A2370DC1B00B9B5A2 /* Constants.swift */,
 				28303F01236C45A800CC9992 /* DurationFormatter.swift */,
 				289E7220236F018B0009B698 /* CollectionViewExtensions.swift */,
 				280570122371997C00B9B5A2 /* TableViewExtensions.swift */,
@@ -146,8 +145,8 @@
 				284792FE236F102E00097B99 /* AlbumListCell.xib */,
 				28479307236F495500097B99 /* ArtistCell.swift */,
 				28479308236F495500097B99 /* ArtistCell.xib */,
-				28EBB13D2370BF8B0028C2D0 /* AlbumSearchCell.swift */,
-				28EBB13E2370BF8B0028C2D0 /* AlbumSearchCell.xib */,
+				28EBB13D2370BF8B0028C2D0 /* SearchCell.swift */,
+				28EBB13E2370BF8B0028C2D0 /* SearchCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -182,6 +181,7 @@
 				28AC33E32367342F003F3D4D /* AppDelegate.swift */,
 				28AC33E52367342F003F3D4D /* SceneDelegate.swift */,
 				28AC33E92367342F003F3D4D /* Main.storyboard */,
+				2805700A2370DC1B00B9B5A2 /* Constants.swift */,
 				284792FA236F0C6500097B99 /* Core Data */,
 				28A4969F236A0EA800914085 /* Networking */,
 				282228A32369F21A0030D295 /* Models */,
@@ -277,7 +277,7 @@
 				2847930A236F495500097B99 /* ArtistCell.xib in Resources */,
 				2868E2AD23682B2F00683CF0 /* AlbumGridCell.xib in Resources */,
 				28479300236F102E00097B99 /* AlbumListCell.xib in Resources */,
-				28EBB1402370BF8B0028C2D0 /* AlbumSearchCell.xib in Resources */,
+				28EBB1402370BF8B0028C2D0 /* SearchCell.xib in Resources */,
 				28AC33F323673433003F3D4D /* LaunchScreen.storyboard in Resources */,
 				280570112371939300B9B5A2 /* FavoriteTableViewCell.xib in Resources */,
 				28AC33F023673433003F3D4D /* Assets.xcassets in Resources */,
@@ -301,7 +301,7 @@
 				283FA28F23678D8F002897AF /* FavoritesViewController.swift in Sources */,
 				28A496A9236A27F900914085 /* Artist.swift in Sources */,
 				28AC33E42367342F003F3D4D /* AppDelegate.swift in Sources */,
-				28EBB13F2370BF8B0028C2D0 /* AlbumSearchCell.swift in Sources */,
+				28EBB13F2370BF8B0028C2D0 /* SearchCell.swift in Sources */,
 				28A496A3236A208D00914085 /* FirstLaunchViewController.swift in Sources */,
 				2805700D2370DDD100B9B5A2 /* SuggestedArtist.swift in Sources */,
 				280570132371997C00B9B5A2 /* TableViewExtensions.swift in Sources */,

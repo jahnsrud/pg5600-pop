@@ -69,8 +69,9 @@ class AlbumViewController: UIViewController {
                     
                     let response = try JSONDecoder().decode(TracksResponse.self, from: data!)
                     
-                    for track in response.track {
+                    for var track in response.track {
                         // print("Track: \(track.name)")
+                        track.albumArtUrl = self.album?.albumArtUrl
                         self.tracks.append(track)
                         
                     }

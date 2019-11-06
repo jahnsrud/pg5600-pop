@@ -13,7 +13,8 @@ import CoreData
 class FavoritesViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var suggestionsView: UICollectionView!
+    @IBOutlet weak var suggestionsCollectionView: UICollectionView!
+    @IBOutlet weak var suggestionsView: UIView!
     @IBOutlet weak var editBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var emptyStateLabel: UILabel!
     
@@ -31,18 +32,22 @@ class FavoritesViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        suggestionsView.dataSource = self
-        suggestionsView.delegate = self
+        suggestionsCollectionView.dataSource = self
+        suggestionsCollectionView.delegate = self
         
-        // Our TableView
-        tableView.register(UINib(nibName: "FavoriteTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
-        
-        // And the CollectionView
-        suggestionsView.register(UINib(nibName: "ArtistCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
+        registerCells()
         
         loadFavorites()
         loadSuggestions()
         
+    }
+    
+    func registerCells() {
+        // Our TableView
+        tableView.register(UINib(nibName: "FavoriteTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
+        
+        // And the CollectionView
+        suggestionsCollectionView.register(UINib(nibName: "ArtistCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,12 +57,12 @@ class FavoritesViewController: UIViewController {
         
     }
     
+    // TODO: Improve
+    
     func loadFavorites() {
         
-        // TODO: Improve
-        
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
-        let sort = NSSortDescriptor(key: #keyPath(Favorite.track), ascending: true)
+        let sort = NSSortDescriptor(key: #keyPath(Favorite.sortId), ascending: true)
         fetchRequest.sortDescriptors = [sort]
         
         do {
@@ -69,16 +74,6 @@ class FavoritesViewController: UIViewController {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
         
-        
-        /*
-         do {
-         favorites.removeAll()
-         favorites = try context.fetch(fetchRequest) as! [Favorite]
-         } catch let error as NSError {
-         print("Error: \(error.localizedDescription)")
-         }
-         
-         self.tableView.reloadData(animated: true)*/
         
     }
     
@@ -136,13 +131,14 @@ class FavoritesViewController: UIViewController {
     // Gets the current artists and outputs a string with all artists
     // Formatted for the following API
     // https://tastedive.com/read/api
+    
     func getArtistsFormatted() -> String {
         
         guard let mFavorites = fetchedResultsController.fetchedObjects else { return "" }
         
         // TODO: Convert to map,something
         
-        var query:String = ""
+        var query: String = ""
         
         for favorite in mFavorites {
             if var artist = favorite.artist {
@@ -159,50 +155,62 @@ class FavoritesViewController: UIViewController {
     }
     
     func loadSuggestions() {
-        // if favorites.count > 0 {
         
-        print("Loading suggestions based on: \(getArtistsFormatted())")
+        // TODO: Uncomment :)
         
-        let url = "\(suggestionsApiBaseUrl)similar?q=\(getArtistsFormatted())?type=music"
-        let handler = NetworkHandler()
+        return
         
-        self.suggestedArtists.removeAll()
-        self.suggestionsView.reloadData(animated: true)
+        let mFavorites = fetchedResultsController.fetchedObjects
         
-        handler.getData(url: URL(string: url)!, completionHandler: { data, response, error in
+        if mFavorites?.count ?? 0 > 0 {
             
-            if (error != nil) {
-                print("Error: \(error?.localizedDescription)")
-                return
-            }
+            print("Loading suggestions based on: \(getArtistsFormatted())")
             
-            do {
+            let url = "\(suggestionsApiBaseUrl)similar?q=\(getArtistsFormatted())?type=music&k=\(suggestionsApiKey)"
+            print("Request URL: \(url)")
+            
+            let handler = NetworkHandler()
+            
+            self.suggestedArtists.removeAll()
+            self.suggestionsCollectionView.reloadData(animated: true)
+            
+            handler.getData(url: URL(string: url)!, completionHandler: { data, response, error in
                 
-                let response = try JSONDecoder().decode(SuggestionsResponse.self, from: data!)
-                
-                
-                for suggestion in response.similar.results {
-                    print(suggestion)
-                    
-                    self.suggestedArtists.append(suggestion)
+                if (error != nil) {
+                    print("Error: \(error?.localizedDescription)")
+                    return
                 }
                 
-                self.suggestionsView.reloadData(animated: true)
+                do {
+                    
+                    let response = try JSONDecoder().decode(SuggestionsResponse.self, from: data!)
+                    
+                    
+                    for suggestion in response.similar.results {
+                        print(suggestion)
+                        
+                        self.suggestedArtists.append(suggestion)
+                    }
+                    
+                    self.suggestionsCollectionView.reloadData(animated: true)
+                    
+                    
+                    
+                } catch let error {
+                    print(error)
+                    
+                }
                 
-                
-                
-            } catch let error {
-                print(error)
-                
-            }
+            })
             
-        })
-        
-        
-        
-        
-        
-        // }
+            
+            
+            
+            
+        } else {
+            self.suggestedArtists.removeAll()
+            self.suggestionsCollectionView.reloadData(animated: true)
+        }
         
     }
     
@@ -212,7 +220,7 @@ class FavoritesViewController: UIViewController {
         
         // TODO: FIX Don't unwrap
         
-        let convertedTrack = Track(name: favorite.track!, duration: favorite.duration!, artist: favorite.artist!, videoUrl: favorite.videoUrl!)
+        let convertedTrack = Track(name: favorite.track!, duration: favorite.duration!, artist: favorite.artist!, videoUrl: favorite.videoUrl!, albumArtUrl: favorite.albumArtUrl!)
         
         vc.track = convertedTrack
         
@@ -301,9 +309,23 @@ extension FavoritesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
-        print("MOVe IT!")
+        // guard let mFavorites = fetchedResultsController.fetchedObjects else { return }
+        
+        // TODO: Fix. Improve code and avoid force unwrap?
+        var mFavorites = self.fetchedResultsController.fetchedObjects!
+        
+        let favoriteToMove = mFavorites[sourceIndexPath.row]
+        mFavorites.remove(at: sourceIndexPath.row)
+        mFavorites.insert(favoriteToMove, at: destinationIndexPath.row)
         
         // Update all favorites with new ID
+        for (index, favorite) in mFavorites.enumerated() {
+            favorite.sortId = Int16(index)
+        }
+        
+        self.dbManager.saveContext()
+        
+        
         
         
     }
@@ -321,6 +343,13 @@ extension FavoritesViewController: UITableViewDelegate {
 
 extension FavoritesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if suggestedArtists.count > 0 {
+            suggestionsView.isHidden = false
+        } else {
+            suggestionsView.isHidden = true
+        }
+        
         return suggestedArtists.count
     }
     

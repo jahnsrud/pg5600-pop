@@ -28,9 +28,7 @@ class NetworkHandler {
             }
             
             completionHandler(data, response, error as NSError?)
-            
-            
-            
+                        
         }
         
         task.resume()

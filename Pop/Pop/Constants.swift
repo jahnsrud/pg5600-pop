@@ -11,3 +11,4 @@ import Foundation
 let apiKey = "1"
 let musicApiBaseUrl = "https://theaudiodb.com/api/v1/json/\(apiKey)/"
 let suggestionsApiBaseUrl = "https://tastedive.com/api/"
+let suggestionsApiKey = "349139-Pop-EEINB50X"
