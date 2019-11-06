@@ -16,14 +16,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="200" height="230"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Track" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDF-HV-Gxj">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Album" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDF-HV-Gxj">
                         <rect key="frame" x="20" y="176" width="160" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Album" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0PT-ev-gC2">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Artist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0PT-ev-gC2">
                         <rect key="frame" x="20" y="196" width="160" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -40,8 +40,8 @@
             <size key="customSize" width="202" height="227"/>
             <connections>
                 <outlet property="albumArtView" destination="m5q-z4-pPQ" id="XQp-z2-nrr"/>
-                <outlet property="albumTitleLabel" destination="0PT-ev-gC2" id="UdX-Cz-pEQ"/>
-                <outlet property="trackTitleLabel" destination="tDF-HV-Gxj" id="Lyd-Lv-F31"/>
+                <outlet property="albumLabel" destination="tDF-HV-Gxj" id="iPd-CN-0uB"/>
+                <outlet property="artistLabel" destination="0PT-ev-gC2" id="pOx-9z-M7D"/>
             </connections>
             <point key="canvasLocation" x="153.62318840579712" y="174.77678571428569"/>
         </collectionViewCell>

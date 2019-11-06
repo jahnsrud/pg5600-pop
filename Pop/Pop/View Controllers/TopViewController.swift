@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 enum Layout {
     case grid
@@ -135,22 +134,16 @@ extension TopViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridCell", for: indexPath) as! AlbumGridCell
             let album = albums[indexPath.item]
             
+            cell.setup(album: album)
             
-            cell.albumTitleLabel.text = album.artist
-            cell.trackTitleLabel.text = album.title
-            cell.albumArtView.kf.setImage(with: URL(string: album.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
-            cell.albumArtView.layer.cornerRadius = 4
+            
             return cell
             
         case .list:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListCell", for: indexPath) as! AlbumListCell
             let album = albums[indexPath.item]
+            cell.setup(album: album)
             
-            
-            cell.albumTitleLabel.text = album.artist
-            cell.trackTitleLabel.text = album.title
-            cell.albumArtView.kf.setImage(with: URL(string: album.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
-            cell.albumArtView.layer.cornerRadius = 4
             return cell
         }
     }

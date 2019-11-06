@@ -7,16 +7,24 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AlbumGridCell: UICollectionViewCell {
     
-    @IBOutlet weak var trackTitleLabel: UILabel!
-    @IBOutlet weak var albumTitleLabel: UILabel!
+    @IBOutlet weak var albumLabel: UILabel!
+    @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var albumArtView: AlbumArtView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+    }
+    
+    func setup(album: Album) {
+        albumLabel.text = album.title
+        artistLabel.text = album.artist
+        albumArtView.kf.setImage(with: URL(string: album.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
+
     }
     
     override var isHighlighted: Bool {

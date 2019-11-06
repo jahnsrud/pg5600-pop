@@ -9,7 +9,7 @@
 import UIKit
 
 class FavoriteTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var albumArtView: AlbumArtView!
     @IBOutlet weak var trackLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
@@ -19,10 +19,24 @@ class FavoriteTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
     }
-
+    
+    func setup(favorite: Favorite) {
+        
+        trackLabel.text = favorite.track
+        artistLabel.text = favorite.artist
+        
+        if let intDuration = Int(favorite.duration ?? "") {
+            durationLabel.text = intDuration.convertMillisecondsToHumanReadable()
+        } else {
+            durationLabel.text = ""
+        }
+        
+        albumArtView.kf.setImage(with: URL(string: favorite.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
     }
     
 }

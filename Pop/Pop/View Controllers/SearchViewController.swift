@@ -188,17 +188,16 @@ extension SearchViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SearchCell
         
         if indexPath.section == 0 {
-            let album = albumResults[indexPath.row]
             
-            cell.titleLabel.text = album.title
-            cell.descriptionLabel.text = album.artist
-            cell.albumArtView.kf.setImage(with: URL(string: album.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
+            let album = albumResults[indexPath.row]
+            cell.setup(album: album)
+            
+            
         } else {
             let artist = artistResults[indexPath.row]
+            cell.setup(artist: artist)
             
-            cell.titleLabel.text = artist.name
-            cell.descriptionLabel.text = artist.name
-            cell.albumArtView.kf.setImage(with: URL(string: artist.imageUrl ), placeholder: UIImage(named: "placeholder-album"))
+            
             
         }
         

@@ -114,14 +114,7 @@ extension AlbumViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TrackTableViewCell
         
         let track = tracks[indexPath.row]
-        
-        if let intDuration = Int(track.duration) {
-            cell.durationLabel.text = intDuration.convertMillisecondsToHumanReadable()
-        } else {
-            cell.durationLabel.text = ""
-        }
-        
-        cell.titleLabel.text = track.name
+        cell.setup(track: track)
         
         
         return cell

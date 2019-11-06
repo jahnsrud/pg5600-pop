@@ -156,10 +156,6 @@ class FavoritesViewController: UIViewController {
     
     func loadSuggestions() {
         
-        // TODO: Uncomment :)
-        
-        return
-        
         let mFavorites = fetchedResultsController.fetchedObjects
         
         if mFavorites?.count ?? 0 > 0 {
@@ -220,7 +216,11 @@ class FavoritesViewController: UIViewController {
         
         // TODO: FIX Don't unwrap
         
-        let convertedTrack = Track(name: favorite.track!, duration: favorite.duration!, artist: favorite.artist!, videoUrl: favorite.videoUrl!, albumArtUrl: favorite.albumArtUrl!)
+        let convertedTrack = Track(name: favorite.track!,
+                                   duration: favorite.duration!,
+                                   artist: favorite.artist!,
+                                   videoUrl: favorite.videoUrl!,
+                                   albumArtUrl: favorite.albumArtUrl!)
         
         vc.track = convertedTrack
         
@@ -261,19 +261,9 @@ extension FavoritesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FavoriteTableViewCell
-        
         let favorite = fetchedResultsController.object(at: indexPath)
         
-        cell.trackLabel.text = favorite.track
-        cell.artistLabel.text = favorite.artist
-        
-        if let intDuration = Int(favorite.duration ?? "") {
-            cell.durationLabel.text = intDuration.convertMillisecondsToHumanReadable()
-        } else {
-            cell.durationLabel.text = ""
-        }
-        
-        cell.albumArtView.kf.setImage(with: URL(string: favorite.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
+        cell.setup(favorite: favorite)
         
         
         return cell
@@ -361,10 +351,10 @@ extension FavoritesViewController: UICollectionViewDataSource {
         
         cell.artistLabel.text = artist.name
         
-        cell.imageView.image = #imageLiteral(resourceName: "placeholder-album")
+        // cell.imageView.image = #imageLiteral(resourceName: "placeholder-album")
         cell.imageView.layer.cornerRadius = cell.imageView.bounds.size.width/2
         cell.imageView.layer.masksToBounds = true
-        cell.imageView.backgroundColor = .blue
+        cell.imageView.backgroundColor = .random
         
         return cell
     }

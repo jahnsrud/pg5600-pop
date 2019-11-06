@@ -28,6 +28,7 @@
 		2868E2AC23682B2F00683CF0 /* AlbumGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2868E2AA23682B2F00683CF0 /* AlbumGridCell.swift */; };
 		2868E2AD23682B2F00683CF0 /* AlbumGridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2868E2AB23682B2F00683CF0 /* AlbumGridCell.xib */; };
 		2868E2AF236860D400683CF0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2868E2AE236860D400683CF0 /* SearchViewController.swift */; };
+		286DDA6B237373CB00084F40 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DDA6A237373CB00084F40 /* Color.swift */; };
 		289E7221236F018B0009B698 /* CollectionViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E7220236F018B0009B698 /* CollectionViewExtensions.swift */; };
 		28A496A1236A0FC300914085 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A496A0236A0FC300914085 /* NetworkHandler.swift */; };
 		28A496A3236A208D00914085 /* FirstLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A496A2236A208D00914085 /* FirstLaunchViewController.swift */; };
@@ -68,6 +69,7 @@
 		2868E2AA23682B2F00683CF0 /* AlbumGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumGridCell.swift; sourceTree = "<group>"; };
 		2868E2AB23682B2F00683CF0 /* AlbumGridCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumGridCell.xib; sourceTree = "<group>"; };
 		2868E2AE236860D400683CF0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		286DDA6A237373CB00084F40 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		289E7220236F018B0009B698 /* CollectionViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewExtensions.swift; sourceTree = "<group>"; };
 		28A496A0236A0FC300914085 /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		28A496A2236A208D00914085 /* FirstLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				280570122371997C00B9B5A2 /* TableViewExtensions.swift */,
 				28479303236F268B00097B99 /* ActionButton.swift */,
 				28EBB13B2370B13E0028C2D0 /* AlbumArtView.swift */,
+				286DDA6A237373CB00084F40 /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				280570102371939300B9B5A2 /* FavoriteTableViewCell.swift in Sources */,
 				284792FC236F0C8400097B99 /* DatabaseManager.swift in Sources */,
 				28AC33FC23676F6A003F3D4D /* AlbumViewController.swift in Sources */,
+				286DDA6B237373CB00084F40 /* Color.swift in Sources */,
 				2868E2AC23682B2F00683CF0 /* AlbumGridCell.swift in Sources */,
 				28AC33E62367342F003F3D4D /* SceneDelegate.swift in Sources */,
 				28A496A5236A27D400914085 /* TrackViewController.swift in Sources */,

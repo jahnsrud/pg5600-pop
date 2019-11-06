@@ -15,8 +15,17 @@ class TrackTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
 
+    }
+    
+    func setup(track: Track) {
+        if let intDuration = Int(track.duration) {
+            durationLabel.text = intDuration.convertMillisecondsToHumanReadable()
+        } else {
+            durationLabel.text = ""
+        }
+        
+        titleLabel.text = track.name
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
