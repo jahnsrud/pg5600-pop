@@ -14,6 +14,8 @@ class AlbumGridCell: UICollectionViewCell {
     @IBOutlet weak var albumLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var albumArtView: AlbumArtView!
+    @IBOutlet weak var chartNumberView: UIView!
+    @IBOutlet weak var chartNumberLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,6 +26,10 @@ class AlbumGridCell: UICollectionViewCell {
         albumLabel.text = album.title
         artistLabel.text = album.artist
         albumArtView.kf.setImage(with: URL(string: album.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
+        
+        
+        chartNumberView.layer.cornerRadius = chartNumberView.bounds.size.width/2
+        chartNumberView.isHidden = true
 
     }
     

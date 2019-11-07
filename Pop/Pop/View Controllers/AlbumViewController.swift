@@ -45,7 +45,7 @@ class AlbumViewController: UIViewController {
             let url = URL(string: albumArtUrl)
             albumArtView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder-album"))
         } else {
-            albumArtView.image = UIImage(named: "placeholder-cover")
+            albumArtView.image = UIImage(named: "placeholder-album")
         }
         
     }
@@ -118,6 +118,10 @@ extension AlbumViewController: UITableViewDataSource {
         
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return "Released in \(album?.yearReleased ?? "")"
     }
     
     
