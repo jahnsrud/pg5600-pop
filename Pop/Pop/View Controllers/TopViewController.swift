@@ -54,21 +54,23 @@ class TopViewController: UIViewController {
         
         let url = "\(musicApiBaseUrl)mostloved.php?format=album"
         
-        let handler = NetworkHandler()
+        let handler = NetworkClient()
         
-        handler.getData(url: URL(string: url)!, completionHandler: { data, response, error in
+        handler.fetch(url: URL(string: url)!, completionHandler: { data, response, error in
             
             if (error != nil) {
-                print("Error: \(error?.localizedDescription)")
+                print("Error: \(error?.localizedDescription ?? "Something went wrong.")")
                 return
             }
             
             do {
                 
+                /*guard let responseData = data else {
+                 }*/
+                
                 let response = try JSONDecoder().decode(Response.self, from: data!)
                 
                 for album in response.loved {
-                    // print(album.title)
                     self.albums.append(album)
                 }
                 
@@ -93,8 +95,8 @@ class TopViewController: UIViewController {
         case .grid:
             UserDefaults.standard.set("list", forKey: "layoutType")
         case .list:
-         UserDefaults.standard.set("grid", forKey: "layoutType")
-       
+            UserDefaults.standard.set("grid", forKey: "layoutType")
+            
         }
         
         print("Switching to \(layoutType)")

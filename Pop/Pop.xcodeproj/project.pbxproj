@@ -30,7 +30,7 @@
 		2868E2AF236860D400683CF0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2868E2AE236860D400683CF0 /* SearchViewController.swift */; };
 		286DDA6B237373CB00084F40 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286DDA6A237373CB00084F40 /* Color.swift */; };
 		289E7221236F018B0009B698 /* CollectionViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E7220236F018B0009B698 /* CollectionViewExtensions.swift */; };
-		28A496A1236A0FC300914085 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A496A0236A0FC300914085 /* NetworkHandler.swift */; };
+		28A496A1236A0FC300914085 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A496A0236A0FC300914085 /* NetworkClient.swift */; };
 		28A496A3236A208D00914085 /* FirstLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A496A2236A208D00914085 /* FirstLaunchViewController.swift */; };
 		28A496A5236A27D400914085 /* TrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A496A4236A27D400914085 /* TrackViewController.swift */; };
 		28A496A7236A27EE00914085 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A496A6236A27EE00914085 /* Track.swift */; };
@@ -71,7 +71,7 @@
 		2868E2AE236860D400683CF0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		286DDA6A237373CB00084F40 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		289E7220236F018B0009B698 /* CollectionViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewExtensions.swift; sourceTree = "<group>"; };
-		28A496A0236A0FC300914085 /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
+		28A496A0236A0FC300914085 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		28A496A2236A208D00914085 /* FirstLaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchViewController.swift; sourceTree = "<group>"; };
 		28A496A4236A27D400914085 /* TrackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewController.swift; sourceTree = "<group>"; };
 		28A496A6236A27EE00914085 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 		28A4969F236A0EA800914085 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				28A496A0236A0FC300914085 /* NetworkHandler.swift */,
+				28A496A0236A0FC300914085 /* NetworkClient.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -300,7 +300,7 @@
 				28479309236F495500097B99 /* ArtistCell.swift in Sources */,
 				289E7221236F018B0009B698 /* CollectionViewExtensions.swift in Sources */,
 				28AC33FE2367743E003F3D4D /* TopViewController.swift in Sources */,
-				28A496A1236A0FC300914085 /* NetworkHandler.swift in Sources */,
+				28A496A1236A0FC300914085 /* NetworkClient.swift in Sources */,
 				283FA28F23678D8F002897AF /* FavoritesViewController.swift in Sources */,
 				28A496A9236A27F900914085 /* Artist.swift in Sources */,
 				28AC33E42367342F003F3D4D /* AppDelegate.swift in Sources */,

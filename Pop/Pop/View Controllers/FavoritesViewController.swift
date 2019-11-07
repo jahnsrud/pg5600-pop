@@ -165,12 +165,12 @@ class FavoritesViewController: UIViewController {
             let url = "\(suggestionsApiBaseUrl)similar?q=\(getArtistsFormatted())?type=music&k=\(suggestionsApiKey)"
             print("Request URL: \(url)")
             
-            let handler = NetworkHandler()
+            let handler = NetworkClient()
             
             self.suggestedArtists.removeAll()
             self.suggestionsCollectionView.reloadData(animated: true)
             
-            handler.getData(url: URL(string: url)!, completionHandler: { data, response, error in
+            handler.fetch(url: URL(string: url)!, completionHandler: { data, response, error in
                 
                 if (error != nil) {
                     print("Error: \(error?.localizedDescription)")
@@ -220,7 +220,8 @@ class FavoritesViewController: UIViewController {
                                    duration: favorite.duration!,
                                    artist: favorite.artist!,
                                    videoUrl: favorite.videoUrl!,
-                                   albumArtUrl: favorite.albumArtUrl!)
+                                   albumArtUrl: favorite.albumArtUrl!,
+                                   trackId: favorite.trackId!)
         
         vc.track = convertedTrack
         
@@ -380,7 +381,7 @@ extension FavoritesViewController: UICollectionViewDelegate {
 
 extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: 100)
+        return CGSize(width: 200, height: collectionView.bounds.size.height)
     }
     
 }

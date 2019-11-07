@@ -14,6 +14,7 @@ struct Track: Codable {
     let artist: String
     let videoUrl: String?
     var albumArtUrl: String?
+    let trackId: String
     
     private enum CodingKeys: String, CodingKey {
         case name = "strTrack"
@@ -21,6 +22,7 @@ struct Track: Codable {
         case artist = "strArtist"
         case videoUrl = "strMusicVid"
         case albumArtUrl
+        case trackId = "idTrack"
         
     }
     

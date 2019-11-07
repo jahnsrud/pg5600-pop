@@ -56,9 +56,9 @@ class AlbumViewController: UIViewController {
             
             let url = "\(musicApiBaseUrl)track.php?m=\(albumId)"
             
-            let handler = NetworkHandler()
+            let handler = NetworkClient()
             
-            handler.getData(url: URL(string: url)!, completionHandler: { data, response, error in
+            handler.fetch(url: URL(string: url)!, completionHandler: { data, response, error in
                 
                 if (error != nil) {
                     print("Error: \(error?.localizedDescription)")
@@ -121,7 +121,7 @@ extension AlbumViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "Released in \(album?.yearReleased ?? "")"
+        return album?.genre
     }
     
     

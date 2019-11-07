@@ -8,10 +8,13 @@
 
 import UIKit
 import WebKit
+import CoreData
 
 class TrackViewController: UIViewController {
     
     var track: Track?
+    var isFavorited = false
+    var favorite: Favorite?
     
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var favoriteButton: UIButton!
@@ -32,19 +35,31 @@ class TrackViewController: UIViewController {
             print(videoUrl)
             
             if videoUrl.count > 0 {
-                webView.load(URLRequest(url: URL(string: videoUrl)!))
+                // webView.load(URLRequest(url: URL(string: videoUrl)!))
             }
+            
+        }
+        
+        // TODO: Don't force unwrap
+        
+        checkIfTrackIsFavorited(track!)
+        
+    }
+    
+    @IBAction func favoriteAction(_ sender: Any) {
+        
+        if isFavorited {
+            // TODO: Don't force unwrap
+            promptDeletionOfFavorite(favorite!)
+            
+        } else {
+            addTrackToDatabase()
             
         }
         
     }
     
-    @IBAction func favoriteAction(_ sender: Any) {
-        addOrDeleteFavorite()
-    }
-    
-    func addOrDeleteFavorite() {
-        
+    func addTrackToDatabase() {
         let dbManager = DatabaseManager.sharedInstance
         
         let favorite = Favorite(context: dbManager.persistentContainer.viewContext)
@@ -54,23 +69,76 @@ class TrackViewController: UIViewController {
         favorite.duration = track?.duration
         favorite.albumArtUrl = track?.albumArtUrl
         favorite.videoUrl = track?.videoUrl
+        favorite.trackId = track?.trackId
         favorite.sortId = 9999
         
         
         dbManager.saveContext()
-
-        // promptDeletionOfTrack()
+        
+        self.checkIfTrackIsFavorited(self.track!)
+    }
+    
+    func checkIfTrackIsFavorited(_ track: Track) {
+        
+        // TODO: Needs major improvements
         
         
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
+        let sort = NSSortDescriptor(key: #keyPath(Favorite.sortId), ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        
+        let dbManager = DatabaseManager.sharedInstance
+        
+        do {
+            let result = try dbManager.persistentContainer.viewContext.fetch(fetchRequest)
+            
+            print("Searching...")
+            
+            // TODO: improve
+            for favorite in result as! [Favorite] {
+                print("FOUND FROM SEARCH: \(favorite.trackId)")
+                
+                if self.track?.trackId == favorite.trackId {
+                    print("Is favorited!")
+                    self.isFavorited = true
+                    self.favorite = favorite
+                    
+                    break
+                    
+                }
+                
+            }
+            
+            self.displayFavoritedOrNot()
+            
+        } catch {
+            print("Failed")
+        }
         
         
     }
     
-    func promptDeletionOfTrack(_ track: Track) {
+    func displayFavoritedOrNot() {
+        DispatchQueue.main.async {
+            if self.isFavorited {
+                self.favoriteButton.setTitle("Remove", for: .normal)
+            } else {
+                self.favoriteButton.setTitle("Favorite", for: .normal)
+            }
+        }
+    }
+    
+    func promptDeletionOfFavorite(_ favorite: Favorite) {
         let alert = UIAlertController(title: "Delete \(0)?", message: "This track will be removed from your favorites", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
             
-            // TODO: Delete
+            let dbManager = DatabaseManager.sharedInstance
+            
+            dbManager.persistentContainer.viewContext.delete(favorite)
+            dbManager.saveContext()
+            
+            // TODO: FIX
+            self.checkIfTrackIsFavorited(self.track!)
             
         }))
         
