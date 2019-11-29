@@ -366,7 +366,7 @@ extension FavoritesViewController: UICollectionViewDataSource {
 extension FavoritesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let artist = suggestedArtists[indexPath.item]
+        // let artist = suggestedArtists[indexPath.item]
         
         // TODO: FIX
         
