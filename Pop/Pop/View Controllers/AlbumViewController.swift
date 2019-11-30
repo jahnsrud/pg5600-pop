@@ -60,8 +60,8 @@ class AlbumViewController: UIViewController {
             
             handler.fetch(url: URL(string: url)!, completionHandler: { data, response, error in
                 
-                if (error != nil) {
-                    print("Error: \(error?.localizedDescription)")
+                if let fetchError = error {
+                    print("Error: \(fetchError.localizedDescription)")
                     return
                 }
                 
