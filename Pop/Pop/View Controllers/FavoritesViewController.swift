@@ -23,8 +23,7 @@ class FavoritesViewController: UIViewController {
     
     var fetchedResultsController: NSFetchedResultsController<Favorite>!
     
-    let dbManager = DatabaseManager.sharedInstance
-    let context = DatabaseManager.sharedInstance.persistentContainer.viewContext
+    let context = DatabaseManager.persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +92,7 @@ class FavoritesViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
             
             self.context.delete(favorite)
-            self.dbManager.saveContext()
+            DatabaseManager.saveContext()
             
             self.tableView.reloadData(animated: true)
             
@@ -314,7 +313,7 @@ extension FavoritesViewController: UITableViewDelegate {
             favorite.sortId = Int16(index)
         }
         
-        self.dbManager.saveContext()
+        DatabaseManager.saveContext()
         
         
         

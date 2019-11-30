@@ -9,15 +9,9 @@
 import Foundation
 import CoreData
 
-class DatabaseManager {
-    
-    static let sharedInstance = DatabaseManager()
-    
-    private init() {
-        
-    }
-    
-    lazy var persistentContainer: NSPersistentContainer = {
+struct DatabaseManager {
+
+    static var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
          creates and returns a container, having loaded the store for the
@@ -46,7 +40,7 @@ class DatabaseManager {
     
     // MARK: - Core Data Saving support
     
-    func saveContext () {
+    static func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {

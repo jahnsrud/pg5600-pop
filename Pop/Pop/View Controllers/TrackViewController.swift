@@ -60,9 +60,8 @@ class TrackViewController: UIViewController {
     }
     
     func addTrackToDatabase() {
-        let dbManager = DatabaseManager.sharedInstance
         
-        let favorite = Favorite(context: dbManager.persistentContainer.viewContext)
+        let favorite = Favorite(context: DatabaseManager.persistentContainer.viewContext)
         
         favorite.artist = track?.artist
         favorite.track = track?.name
@@ -73,7 +72,7 @@ class TrackViewController: UIViewController {
         favorite.sortId = 9999
         
         
-        dbManager.saveContext()
+        DatabaseManager.saveContext()
         
         self.checkIfTrackIsFavorited(self.track!)
     }
@@ -87,10 +86,9 @@ class TrackViewController: UIViewController {
         let sort = NSSortDescriptor(key: #keyPath(Favorite.sortId), ascending: true)
         fetchRequest.sortDescriptors = [sort]
         
-        let dbManager = DatabaseManager.sharedInstance
         
         do {
-            let result = try dbManager.persistentContainer.viewContext.fetch(fetchRequest)
+            let result = try DatabaseManager.persistentContainer.viewContext.fetch(fetchRequest)
             
             print("Searching...")
             
@@ -132,10 +130,9 @@ class TrackViewController: UIViewController {
         let alert = UIAlertController(title: "Delete \(0)?", message: "This track will be removed from your favorites", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
             
-            let dbManager = DatabaseManager.sharedInstance
             
-            dbManager.persistentContainer.viewContext.delete(favorite)
-            dbManager.saveContext()
+            DatabaseManager.persistentContainer.viewContext.delete(favorite)
+            DatabaseManager.saveContext()
             
             // TODO: FIX
             self.checkIfTrackIsFavorited(self.track!)
