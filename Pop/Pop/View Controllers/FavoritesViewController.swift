@@ -218,7 +218,7 @@ class FavoritesViewController: UIViewController {
         let convertedTrack = Track(name: favorite.track!,
                                    duration: favorite.duration!,
                                    artist: favorite.artist!,
-                                   videoUrl: favorite.videoUrl!,
+                                   videoUrl: favorite.videoUrl,
                                    albumArtUrl: favorite.albumArtUrl!,
                                    trackId: favorite.trackId!)
         

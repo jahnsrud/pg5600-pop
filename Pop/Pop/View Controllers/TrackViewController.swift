@@ -127,7 +127,9 @@ class TrackViewController: UIViewController {
     }
     
     func promptDeletionOfFavorite(_ favorite: Favorite) {
-        let alert = UIAlertController(title: "Delete \(0)?", message: "This track will be removed from your favorites", preferredStyle: .actionSheet)
+        
+        
+        let alert = UIAlertController(title: "Delete \(favorite.track ?? "track")?", message: "This track will be removed from your favorites", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
             
             
@@ -145,6 +147,7 @@ class TrackViewController: UIViewController {
         alert.popoverPresentationController?.sourceView = self.view
         
         present(alert, animated: true, completion: nil)
+            
     }
     
     @IBAction func dismissVC(_ sender: Any) {
