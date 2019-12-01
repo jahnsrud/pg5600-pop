@@ -386,7 +386,7 @@ extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
-// https://medium.com/@KentaKodashima/ios-core-data-tutorial-part-2-41f6740865d5s
+// https://medium.com/@KentaKodashima/ios-core-data-tutorial-part-2-41f6740865d5
 extension FavoritesViewController: NSFetchedResultsControllerDelegate {
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
@@ -396,6 +396,7 @@ extension FavoritesViewController: NSFetchedResultsControllerDelegate {
         switch type {
         case .insert:
             tableView.insertRows(at: [cellIndex], with: .fade)
+            
         default:
             break
         }

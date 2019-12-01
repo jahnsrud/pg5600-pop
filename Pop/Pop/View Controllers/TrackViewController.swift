@@ -13,8 +13,7 @@ import CoreData
 class TrackViewController: UIViewController {
     
     var track: Track?
-    var isFavorited = false
-    var favorite: Favorite?
+    private var favorite: Favorite?
     
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var favoriteButton: UIButton!
@@ -22,11 +21,11 @@ class TrackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadTrack()
+        displayTrack()
         
     }
     
-    func loadTrack() {
+    func displayTrack() {
         title = track?.name
         
         if var videoUrl = track?.videoUrl {
@@ -40,17 +39,14 @@ class TrackViewController: UIViewController {
             
         }
         
-        // TODO: Don't force unwrap
-        
-        checkIfTrackIsFavorited(track!)
+        displayFavoritedStatus()
         
     }
     
     @IBAction func favoriteAction(_ sender: Any) {
         
-        if isFavorited {
-            // TODO: Don't force unwrap
-            promptDeletionOfFavorite(favorite!)
+        if trackIsFavorited() {
+            promptDeletionOfFavorite(favorite)
             
         } else {
             addTrackToDatabase()
@@ -74,51 +70,41 @@ class TrackViewController: UIViewController {
         
         DatabaseManager.saveContext()
         
-        self.checkIfTrackIsFavorited(self.track!)
+        displayFavoritedStatus()
+        
     }
     
-    func checkIfTrackIsFavorited(_ track: Track) {
+    func trackIsFavorited() -> Bool {
         
-        // TODO: Needs major improvements
-        
-        
+        // Checks if there are any matching Favorite objects stored to our database
+                        
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
-        let sort = NSSortDescriptor(key: #keyPath(Favorite.sortId), ascending: true)
-        fetchRequest.sortDescriptors = [sort]
-        
+        let predicate = NSPredicate(format: "trackId == %@", self.track!.trackId)
+        fetchRequest.predicate = predicate
+
+        var matches = 0
         
         do {
-            let result = try DatabaseManager.persistentContainer.viewContext.fetch(fetchRequest)
+            matches = try DatabaseManager.persistentContainer.viewContext.count(for: fetchRequest)
             
-            print("Searching...")
-            
-            // TODO: improve
-            for favorite in result as! [Favorite] {
-                print("FOUND FROM SEARCH: \(favorite.trackId)")
-                
-                if self.track?.trackId == favorite.trackId {
-                    print("Is favorited!")
-                    self.isFavorited = true
-                    self.favorite = favorite
-                    
-                    break
-                    
-                }
+            if matches > 0 {
+                let result = try DatabaseManager.persistentContainer.viewContext.fetch(fetchRequest)
+                self.favorite = result.first as? Favorite
                 
             }
             
-            self.displayFavoritedOrNot()
-            
-        } catch {
-            print("Failed")
+        }
+        catch {
+            print("error executing fetch request: \(error)")
         }
         
-        
+        return matches > 0
+      
     }
     
-    func displayFavoritedOrNot() {
+    func displayFavoritedStatus() {
         DispatchQueue.main.async {
-            if self.isFavorited {
+            if self.trackIsFavorited() {
                 self.favoriteButton.setTitle("Remove", for: .normal)
             } else {
                 self.favoriteButton.setTitle("Favorite", for: .normal)
@@ -126,28 +112,29 @@ class TrackViewController: UIViewController {
         }
     }
     
-    func promptDeletionOfFavorite(_ favorite: Favorite) {
+    func promptDeletionOfFavorite(_ favorite: Favorite?) {
         
+        if let fav = favorite {
+            
+            let alert = UIAlertController(title: "Delete \(fav.track ?? "track")?", message: "This track will be removed from your favorites", preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
+                
+                DatabaseManager.persistentContainer.viewContext.delete(fav)
+                DatabaseManager.saveContext()
+                
+                // TODO: FIX
+                self.displayFavoritedStatus()
+                
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            // The iPad version crashes without a sourceView
+            alert.popoverPresentationController?.sourceView = self.view
+            
+            present(alert, animated: true, completion: nil)
+        }
         
-        let alert = UIAlertController(title: "Delete \(favorite.track ?? "track")?", message: "This track will be removed from your favorites", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
-            
-            
-            DatabaseManager.persistentContainer.viewContext.delete(favorite)
-            DatabaseManager.saveContext()
-            
-            // TODO: FIX
-            self.checkIfTrackIsFavorited(self.track!)
-            
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        // The iPad version crashes without a sourceView
-        alert.popoverPresentationController?.sourceView = self.view
-        
-        present(alert, animated: true, completion: nil)
-            
     }
     
     @IBAction func dismissVC(_ sender: Any) {
