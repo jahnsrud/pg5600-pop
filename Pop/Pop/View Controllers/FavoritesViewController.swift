@@ -397,6 +397,9 @@ extension FavoritesViewController: NSFetchedResultsControllerDelegate {
         case .insert:
             tableView.insertRows(at: [cellIndex], with: .fade)
             
+        case .delete:
+            tableView.deleteRows(at: [cellIndex], with: .left)
+            
         default:
             break
         }
