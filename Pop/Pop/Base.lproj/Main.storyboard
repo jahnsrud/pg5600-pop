@@ -48,6 +48,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Top" id="d0X-Kk-LdT">
+                        <barButtonItem key="leftBarButtonItem" title="/beta/" id="HnI-Vo-9OS">
+                            <connections>
+                                <segue destination="WA1-OW-ALm" kind="presentation" id="zza-hg-RS1"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="icon-list" id="SSU-W7-u4Z">
                             <connections>
                                 <action selector="switchLayout:" destination="BYZ-38-t0r" id="96K-Ht-z0H"/>
@@ -392,27 +397,35 @@
             <objects>
                 <viewController storyboardIdentifier="FirstLaunch" id="WA1-OW-ALm" customClass="FirstLaunchViewController" customModule="Pop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FaD-1s-9Ym">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0BU-lb-uQq">
-                                <rect key="frame" x="114" y="204" width="187" height="44"/>
+                                <rect key="frame" x="114" y="70" width="187" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="1hP-d1-2sr">
-                                <rect key="frame" x="0.0" y="412" width="414" height="200"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i5o-3n-gic" customClass="ActionButton" customModule="Pop" customModuleProvider="target">
+                                <rect key="frame" x="20" y="702" width="374" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Get Started"/>
+                                <connections>
+                                    <action selector="dismissAction:" destination="WA1-OW-ALm" eventType="touchUpInside" id="g0G-dx-s3c"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="1hP-d1-2sr">
+                                <rect key="frame" x="0.0" y="194" width="91.5" height="57"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1" verticalCompressionResistancePriority="1" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWE-BD-w7S">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="163.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="91.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="VaD-Gi-jpS">
-                                        <rect key="frame" x="0.0" y="179.5" width="414" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="36.5" width="91.5" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9Y-Ta-88h">
                                                 <rect key="frame" x="0.0" y="0.0" width="41.5" height="20.5"/>
@@ -421,7 +434,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfp-oZ-c1k">
-                                                <rect key="frame" x="380" y="0.0" width="34" height="20.5"/>
+                                                <rect key="frame" x="57.5" y="0.0" width="34" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -430,22 +443,9 @@
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="S7T-If-aEP"/>
-                                </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i5o-3n-gic" customClass="ActionButton" customModule="Pop" customModuleProvider="target">
-                                <rect key="frame" x="20" y="702" width="374" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Get Started"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="Fqv-rb-rB7" firstAttribute="trailing" secondItem="1hP-d1-2sr" secondAttribute="trailing" id="J2F-76-Tjv"/>
-                            <constraint firstItem="Fqv-rb-rB7" firstAttribute="bottom" secondItem="1hP-d1-2sr" secondAttribute="bottom" constant="250" id="n3e-cP-mx7"/>
-                            <constraint firstItem="1hP-d1-2sr" firstAttribute="width" secondItem="FaD-1s-9Ym" secondAttribute="width" id="qBA-gm-zFU"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Fqv-rb-rB7"/>
                     </view>
                 </viewController>

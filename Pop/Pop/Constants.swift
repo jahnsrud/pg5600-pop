@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 let musicApiKey = "1"
 let musicApiBaseUrl = "https://theaudiodb.com/api/v1/json/\(musicApiKey)/"
 

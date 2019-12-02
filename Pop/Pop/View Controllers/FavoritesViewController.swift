@@ -22,9 +22,7 @@ class FavoritesViewController: UIViewController {
     var suggestedArtists = [SuggestedArtist]()
     
     var fetchedResultsController: NSFetchedResultsController<Favorite>!
-    
-    let context = DatabaseManager.persistentContainer.viewContext
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,10 +40,7 @@ class FavoritesViewController: UIViewController {
     }
     
     func registerCells() {
-        // Our TableView
         tableView.register(UINib(nibName: "FavoriteTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
-        
-        // And the CollectionView
         suggestionsCollectionView.register(UINib(nibName: "ArtistCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
     }
     
@@ -65,19 +60,24 @@ class FavoritesViewController: UIViewController {
         fetchRequest.sortDescriptors = [sort]
         
         do {
-            fetchedResultsController = (NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil) as! NSFetchedResultsController<Favorite>)
+            fetchedResultsController = (NSFetchedResultsController(
+                fetchRequest: fetchRequest,
+                managedObjectContext: DatabaseManager.persistentContainer.viewContext,
+                sectionNameKeyPath: nil,
+                cacheName: nil)
+                as! NSFetchedResultsController<Favorite>)
+            
             try fetchedResultsController.performFetch()
             fetchedResultsController.delegate = self
             
         } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+            print("Could not fetch. \(error), \(error.localizedDescription)")
         }
         
         
     }
     
     @IBAction func enterEdit(_ sender: Any) {
-        
         self.setEditing(!self.isEditing, animated: true)
         
     }
@@ -91,7 +91,7 @@ class FavoritesViewController: UIViewController {
         let alert = UIAlertController(title: "Delete \(favorite.track ?? "track")?", message: "This track will be removed from your favorites", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
             
-            self.context.delete(favorite)
+            DatabaseManager.persistentContainer.viewContext.delete(favorite)
             DatabaseManager.saveContext()
             
             self.tableView.reloadData(animated: true)
@@ -386,8 +386,11 @@ extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
-// https://medium.com/@KentaKodashima/ios-core-data-tutorial-part-2-41f6740865d5
 extension FavoritesViewController: NSFetchedResultsControllerDelegate {
+    
+    
+    // https://medium.com/@KentaKodashima/ios-core-data-tutorial-part-2-41f6740865d5
+    // Subscribes to changes and updates our UI accordingly.
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         

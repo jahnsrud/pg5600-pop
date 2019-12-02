@@ -15,6 +15,9 @@ class FirstLaunchViewController: UIViewController {
         
     }
     
+    @IBAction func dismissAction(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     
     
