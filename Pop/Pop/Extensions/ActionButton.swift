@@ -24,10 +24,11 @@ class ActionButton: UIButton {
     }
     
     func applyStyle() {
-        self.layer.cornerRadius = 4
-        self.layer.masksToBounds = true
-        self.backgroundColor = .black
-        self.tintColor = .white
+        layer.cornerRadius = 4
+        layer.masksToBounds = true
+        backgroundColor = .black
+        tintColor = .white
+        titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         
     }
     

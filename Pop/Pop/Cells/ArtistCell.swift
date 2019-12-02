@@ -16,15 +16,18 @@ class ArtistCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        iconView.backgroundColor = .black
+        iconView.layer.cornerRadius = iconView.bounds.size.width/2
+        iconView.layer.masksToBounds = true
+        
+        imageView.image = #imageLiteral(resourceName: "icon-pop-text")
+        imageView.backgroundColor = .clear
+        
     }
     
     func setup(artist: Artist) {
         artistLabel.text = artist.name
-        
-        imageView.image = #imageLiteral(resourceName: "icon-pop-text")
-        iconView.layer.cornerRadius = iconView.bounds.size.width/2
-        iconView.layer.masksToBounds = true
-        iconView.backgroundColor = .black
         
     }
     

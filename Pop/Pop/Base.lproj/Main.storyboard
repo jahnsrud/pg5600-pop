@@ -149,7 +149,7 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WvL-qM-g5p">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="230"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" name="AlbumArtBorder"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="n3H-Sn-Xwz">
                                             <size key="itemSize" width="50" height="50"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -532,9 +532,6 @@
         <image name="music.note.list" catalog="system" width="64" height="56"/>
         <image name="placeholder-album" width="333" height="333"/>
         <image name="star.fill" catalog="system" width="64" height="58"/>
-        <namedColor name="AlbumArtBorder">
-            <color red="0.90700000524520874" green="0.90700000524520874" blue="0.90700000524520874" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
         <namedColor name="Dark">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

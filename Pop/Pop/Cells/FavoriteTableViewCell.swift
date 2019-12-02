@@ -39,4 +39,24 @@ class FavoriteTableViewCell: UITableViewCell {
         
     }
     
+    
+    override func willTransition(to state: UITableViewCell.StateMask) {
+        super.willTransition(to: state)
+        
+        // I tried using the API for StateMask, but had to use state.rawValue as a workaround
+        
+        switch state.rawValue {
+            
+        // Edit Mode
+        case 18446744071562067969:
+            durationLabel.isHidden = true
+        // Swipe to delete
+        case 18446744071562067970:
+            durationLabel.isHidden = false
+        default:
+            durationLabel.isHidden = false
+        }
+                
+    }
+    
 }

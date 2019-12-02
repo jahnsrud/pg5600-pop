@@ -122,7 +122,6 @@ class TrackViewController: UIViewController {
                 DatabaseManager.persistentContainer.viewContext.delete(fav)
                 DatabaseManager.saveContext()
                 
-                // TODO: FIX
                 self.displayFavoritedStatus()
                 
             }))

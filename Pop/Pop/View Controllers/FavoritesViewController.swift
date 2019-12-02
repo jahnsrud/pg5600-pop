@@ -49,9 +49,7 @@ class FavoritesViewController: UIViewController {
         loadFavorites()
         
     }
-    
-    // TODO: Improve
-    
+        
     func loadFavorites() {
         
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
@@ -81,21 +79,16 @@ class FavoritesViewController: UIViewController {
         
     }
     
-    func deleteFavorite(at: IndexPath) {
+    func deleteFavorite(indexPath: IndexPath) {
         
-        // TODO: Improve
-        
-        let favorite = fetchedResultsController.object(at: at)
+        let favorite = fetchedResultsController.object(at: indexPath)
         
         let alert = UIAlertController(title: "Delete \(favorite.track ?? "track")?", message: "This track will be removed from your favorites", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
             
             DatabaseManager.persistentContainer.viewContext.delete(favorite)
             DatabaseManager.saveContext()
-            
-            self.tableView.reloadData(animated: true)
-            
-            
+                        
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -134,20 +127,14 @@ class FavoritesViewController: UIViewController {
         
         guard let mFavorites = fetchedResultsController.fetchedObjects else { return "" }
         
-        // TODO: Convert to map,something
-        
         var query: String = ""
         
         for favorite in mFavorites {
-            if var artist = favorite.artist {
-                artist = artist.replacingOccurrences(of: " ", with: "+")
-                query += "\(artist)%2C+"
+            if let artist = favorite.artist {
+                query += "\(artist.replacingOccurrences(of: " ", with: "+"))%2C+"
             }
         }
-        
-        // TODO: DOn't unwrap
-        
-        query = query.lowercased()
+
         
         return query
     }
@@ -180,7 +167,6 @@ class FavoritesViewController: UIViewController {
                     
                     let response = try JSONDecoder().decode(SuggestionsResponse.self, from: data!)
                     
-                    
                     for suggestion in response.similar.results {
                         print(suggestion)
                         
@@ -199,9 +185,6 @@ class FavoritesViewController: UIViewController {
             })
             
             
-            
-            
-            
         } else {
             self.suggestedArtists.removeAll()
             self.suggestionsCollectionView.reloadData(animated: true)
@@ -213,18 +196,28 @@ class FavoritesViewController: UIViewController {
         let navController = self.storyboard?.instantiateViewController(identifier: "TrackVC")
         let vc = navController?.children.first as! TrackViewController
         
+        vc.track = convertFavoriteToTrack(favorite)
+        
+        self.present(navController!, animated: true, completion: nil)
+        
+    }
+    
+    func convertFavoriteToTrack(_ favorite: Favorite) -> Track {
+        
         // TODO: FIX Don't unwrap
+        
+        /* guard let favoriteTrack = favorite.track else {
+            
+        } */
         
         let convertedTrack = Track(name: favorite.track!,
                                    duration: favorite.duration!,
                                    artist: favorite.artist!,
                                    videoUrl: favorite.videoUrl,
-                                   albumArtUrl: favorite.albumArtUrl!,
+                                   albumArtUrl: favorite.albumArtUrl,
                                    trackId: favorite.trackId!)
         
-        vc.track = convertedTrack
-        
-        self.present(navController!, animated: true, completion: nil)
+        return convertedTrack
         
     }
     
@@ -301,7 +294,6 @@ extension FavoritesViewController: UITableViewDelegate {
         
         // guard let mFavorites = fetchedResultsController.fetchedObjects else { return }
         
-        // TODO: Fix. Improve code and avoid force unwrap?
         var mFavorites = self.fetchedResultsController.fetchedObjects!
         
         let favoriteToMove = mFavorites[sourceIndexPath.row]
@@ -316,14 +308,12 @@ extension FavoritesViewController: UITableViewDelegate {
         DatabaseManager.saveContext()
         
         
-        
-        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            deleteFavorite(at: indexPath)
+            deleteFavorite(indexPath: indexPath)
             
             
         }
