@@ -17,6 +17,8 @@ class TrackViewController: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var favoriteButton: UIButton!
+    
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
     
@@ -28,8 +30,10 @@ class TrackViewController: UIViewController {
     }
     
     func displayTrack() {
-        title = track?.name
         
+        title = "Track"
+        
+        titleLabel.text = track?.name
         artistLabel.text = track?.artist
         
         if let intDuration = Int(track?.duration ?? "") {
