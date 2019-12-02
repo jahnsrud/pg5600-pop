@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 class SearchViewController: UIViewController, UISearchBarDelegate {
     

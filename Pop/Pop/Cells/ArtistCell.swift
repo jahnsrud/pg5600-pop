@@ -10,7 +10,8 @@ import UIKit
 
 class ArtistCell: UICollectionViewCell {
     
-    @IBOutlet weak var imageView: AlbumArtView!
+    @IBOutlet weak var iconView: UIView!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var artistLabel: UILabel!
     
     override func awakeFromNib() {
@@ -20,10 +21,11 @@ class ArtistCell: UICollectionViewCell {
     func setup(artist: Artist) {
         artistLabel.text = artist.name
         
-        // cell.imageView.image = #imageLiteral(resourceName: "placeholder-album")
-        imageView.layer.cornerRadius = imageView.bounds.size.width/2
-        imageView.layer.masksToBounds = true
-        imageView.backgroundColor = .random
+        imageView.image = #imageLiteral(resourceName: "icon-pop-text")
+        iconView.layer.cornerRadius = iconView.bounds.size.width/2
+        iconView.layer.masksToBounds = true
+        iconView.backgroundColor = .black
+        
     }
     
 }

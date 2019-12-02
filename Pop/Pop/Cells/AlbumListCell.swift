@@ -25,7 +25,9 @@ class AlbumListCell: UICollectionViewCell {
         artistLabel.text = album.artist
         albumArtView.kf.setImage(with: URL(string: album.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
         
-        backgroundColor = .white
+        backgroundColor = .systemBackground
+        layer.cornerRadius = 12
+        
         
         /*
         Border testing: 

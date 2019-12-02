@@ -187,11 +187,11 @@ extension TopViewController: UICollectionViewDelegate {
 
 extension TopViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+                
         if layoutType == .list {
-            return CGSize(width: collectionView.bounds.size.width, height: 70)
+            return CGSize(width: collectionView.bounds.size.width-32, height: 70)
         } else {
-            return CGSize(width: (collectionView.bounds.size.width/2)-30, height: 230)
+            return CGSize(width: (collectionView.bounds.size.width/2)-32, height: 230)
         }
     }
 }

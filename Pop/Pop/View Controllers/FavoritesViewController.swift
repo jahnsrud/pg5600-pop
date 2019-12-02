@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Kingfisher
 import CoreData
 
 class FavoritesViewController: UIViewController {
@@ -381,7 +380,7 @@ extension FavoritesViewController: UICollectionViewDelegate {
 
 extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: collectionView.bounds.size.height)
+        return CGSize(width: 250, height: collectionView.bounds.size.height)
     }
     
 }
