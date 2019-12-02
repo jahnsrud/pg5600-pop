@@ -167,9 +167,7 @@ class FavoritesViewController: UIViewController {
                     
                     let response = try JSONDecoder().decode(SuggestionsResponse.self, from: data!)
                     
-                    for suggestion in response.similar.results {
-                        print(suggestion)
-                        
+                    for suggestion in response.similar.results {                        
                         self.suggestedArtists.append(suggestion)
                     }
                     

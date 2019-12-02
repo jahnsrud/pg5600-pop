@@ -17,6 +17,8 @@ class TrackViewController: UIViewController {
     
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var artistLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,14 @@ class TrackViewController: UIViewController {
     
     func displayTrack() {
         title = track?.name
+        
+        artistLabel.text = track?.artist
+        
+        if let intDuration = Int(track?.duration ?? "") {
+            durationLabel.text = intDuration.convertMillisecondsToHumanReadable()
+        } else {
+            durationLabel.text = ""
+        }
         
         if var videoUrl = track?.videoUrl {
             
@@ -77,11 +87,11 @@ class TrackViewController: UIViewController {
     func trackIsFavorited() -> Bool {
         
         // Checks if there are any matching Favorite objects stored to our database
-                        
+        
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
         let predicate = NSPredicate(format: "trackId == %@", self.track!.trackId)
         fetchRequest.predicate = predicate
-
+        
         var matches = 0
         
         do {
@@ -99,7 +109,7 @@ class TrackViewController: UIViewController {
         }
         
         return matches > 0
-      
+        
     }
     
     func displayFavoritedStatus() {
