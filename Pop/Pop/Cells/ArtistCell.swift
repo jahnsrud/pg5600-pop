@@ -17,18 +17,26 @@ class ArtistCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+    }
+    
+    func setup(artist: SuggestedArtist) {
+        
         iconView.backgroundColor = .black
         iconView.layer.cornerRadius = iconView.bounds.size.width/2
         iconView.layer.masksToBounds = true
         
         imageView.image = #imageLiteral(resourceName: "icon-pop-text")
-        imageView.backgroundColor = .clear
+        imageView.backgroundColor = .random
+        imageView.layer.cornerRadius = imageView.bounds.size.width/2
         
-    }
-    
-    func setup(artist: Artist) {
         artistLabel.text = artist.name
         
     }
+    
+    func spin() {
+          UIView.animate(withDuration: 0.24, delay: 0, options: UIView.AnimationOptions.curveLinear, animations: { () -> Void in
+              self.iconView.transform = self.iconView.transform.rotated(by: .pi)
+          })
+      }
     
 }

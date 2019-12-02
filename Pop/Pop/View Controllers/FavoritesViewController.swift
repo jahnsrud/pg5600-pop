@@ -336,13 +336,7 @@ extension FavoritesViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ArtistCell
         
         let artist = suggestedArtists[indexPath.item]
-        
-        cell.artistLabel.text = artist.name
-        
-        // cell.imageView.image = #imageLiteral(resourceName: "placeholder-album")
-        cell.imageView.layer.cornerRadius = cell.imageView.bounds.size.width/2
-        cell.imageView.layer.masksToBounds = true
-        cell.imageView.backgroundColor = .random
+        cell.setup(artist: artist)
         
         return cell
     }
@@ -353,17 +347,12 @@ extension FavoritesViewController: UICollectionViewDataSource {
 extension FavoritesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        // let artist = suggestedArtists[indexPath.item]
+        let cell = collectionView.cellForItem(at: indexPath) as! ArtistCell
+        cell.spin()
         
-        // TODO: FIX
-        
-        /*
-         let vc = storyboard?.instantiateViewController(identifier: "ArtistVC") as! ArtistViewController
-         vc.artist = artist
-         navigationController?.pushViewController(vc, animated: true)
-         */
         
     }
+    
 }
 
 extension FavoritesViewController: UICollectionViewDelegateFlowLayout {

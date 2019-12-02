@@ -31,7 +31,7 @@ class TrackViewController: UIViewController {
     
     func displayTrack() {
         
-        title = "Track"
+        title = ""
         
         titleLabel.text = track?.name
         artistLabel.text = track?.artist
