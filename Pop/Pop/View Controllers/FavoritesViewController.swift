@@ -161,6 +161,7 @@ class FavoritesViewController: UIViewController {
             
             print("Loading suggestions based on: \(getArtistsFormatted())")
             
+            // Remember to only request music
             let url = "\(suggestionsApiBaseUrl)similar?q=\(getArtistsFormatted())?type=music&k=\(suggestionsApiKey)"
             print("Request URL: \(url)")
             
