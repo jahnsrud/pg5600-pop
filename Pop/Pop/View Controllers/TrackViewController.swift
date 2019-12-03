@@ -19,8 +19,8 @@ class TrackViewController: UIViewController {
     @IBOutlet weak var favoriteButton: UIButton!
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +42,13 @@ class TrackViewController: UIViewController {
             durationLabel.text = ""
         }
         
+        startVideo()
+        
+        displayFavoritedStatus()
+        
+    }
+    
+    func startVideo() {
         if var videoUrl = track?.videoUrl {
             
             videoUrl = videoUrl.replacingOccurrences(of: "http://", with: "https://")
@@ -52,7 +59,7 @@ class TrackViewController: UIViewController {
                 
                 let playbackOptions: [String: Any] = [
                     "controls": 0,
-                    "modestbranding": 0,
+                    "modestbranding": 1,
                     "playsinline": 1,
                     "rel": 0,
                     "showinfo": 0,
@@ -68,9 +75,9 @@ class TrackViewController: UIViewController {
                 
             }
             
+        } else {
+            playerView.backgroundColor = .black
         }
-        
-        displayFavoritedStatus()
         
     }
     
@@ -132,7 +139,7 @@ class TrackViewController: UIViewController {
             
         }
         catch {
-            print("error executing fetch request: \(error)")
+            print("Something went wrong: \(error)")
         }
         
         return matches > 0
