@@ -18,6 +18,7 @@ class TrackViewController: UIViewController {
     @IBOutlet weak var playerView: YoutubePlayerView!
     @IBOutlet weak var favoriteButton: UIButton!
     
+    @IBOutlet weak var metadataView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
@@ -26,6 +27,7 @@ class TrackViewController: UIViewController {
         super.viewDidLoad()
         
         displayTrack()
+        metadataView.layer.cornerRadius = 4
         
     }
     
@@ -149,12 +151,12 @@ class TrackViewController: UIViewController {
     func displayFavoritedStatus() {
         DispatchQueue.main.async {
             if self.trackIsFavorited() {
-                self.favoriteButton.setTitle("Remove", for: .normal)
+                self.favoriteButton.setTitle("", for: .normal)
                 self.favoriteButton.setImage(UIImage(systemName: "star.slash"), for: .normal)
                 
                 
             } else {
-                self.favoriteButton.setTitle("Favorite", for: .normal)
+                self.favoriteButton.setTitle("", for: .normal)
                 self.favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
             }
         }

@@ -251,7 +251,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xj2-fv-o4M">
-                                <rect key="frame" x="0.0" y="370" width="414" height="129"/>
+                                <rect key="frame" x="16" y="392" width="378" height="192"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afg-rL-ksX">
@@ -275,17 +275,21 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcC-gb-nVJ">
+                                        <rect key="frame" x="28" y="127" width="144" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.43747270110000003" green="0.63128167390000001" blue="0.63137620689999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <state key="normal" title="Open in Spotify">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="openInSpotify:" destination="ub5-0r-fs4" eventType="touchUpInside" id="1Jt-pW-ilz"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.92734087880000005" green="0.92191783270000005" blue="0.93276392490000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.96680005218172982" green="0.96114625070698279" blue="0.97245385365647674" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcC-gb-nVJ">
-                                <rect key="frame" x="154" y="543" width="106" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Open in Spotify"/>
-                                <connections>
-                                    <action selector="openInSpotify:" destination="ub5-0r-fs4" eventType="touchUpInside" id="1Jt-pW-ilz"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -306,6 +310,7 @@
                         <outlet property="artistLabel" destination="Eg5-vi-F3P" id="8Fm-Pt-dYk"/>
                         <outlet property="durationLabel" destination="afg-rL-ksX" id="XSY-qo-yxw"/>
                         <outlet property="favoriteButton" destination="W1F-7a-LeJ" id="HZe-Le-0X2"/>
+                        <outlet property="metadataView" destination="xj2-fv-o4M" id="7C9-n3-aGH"/>
                         <outlet property="playerView" destination="aEJ-oa-mV9" id="gRe-PA-5oN"/>
                         <outlet property="titleLabel" destination="ca8-SQ-9y1" id="b6Z-hu-keH"/>
                     </connections>
