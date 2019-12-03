@@ -12,11 +12,17 @@ class ArtistViewController: UIViewController {
     
     var artist: Artist?
     var albums = [Album]()
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = artist?.name
+        
+        collectionView.register(UINib(nibName: "AlbumGridCell", bundle: nil), forCellWithReuseIdentifier: "GridCell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
         loadDetails()
         
     }
@@ -46,7 +52,8 @@ class ArtistViewController: UIViewController {
                         }
                         
                         DispatchQueue.main.async {
-                            // self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+                            self.collectionView.reloadData(animated: true)
+                            
                         }
                         
                     }
@@ -66,4 +73,52 @@ class ArtistViewController: UIViewController {
     }
     
     
+    func presentAlbum(_ album: Album) {
+        
+        let albumVC = self.storyboard?.instantiateViewController(identifier: "AlbumVC") as! AlbumViewController
+        albumVC.album = album
+        
+        navigationController?.pushViewController(albumVC, animated: true)
+    }
+    
+    
+}
+
+extension ArtistViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        albums.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridCell", for: indexPath) as! AlbumGridCell
+        let album = albums[indexPath.item]
+        
+        cell.setup(album: album)
+        
+        return cell
+        
+        
+    }
+    
+}
+
+
+extension ArtistViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let album = albums[indexPath.item]
+        presentAlbum(album)
+        
+        
+    }
+}
+
+
+extension ArtistViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: (collectionView.bounds.size.width/2)-24, height: 240)
+        
+    }
 }
