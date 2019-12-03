@@ -13,7 +13,7 @@ class AlbumGridCell: UICollectionViewCell {
     
     @IBOutlet weak var albumLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
-    @IBOutlet weak var albumArtView: AlbumArtView!
+    @IBOutlet weak var albumArtView: UIImageView!
     @IBOutlet weak var chartNumberView: UIView!
     @IBOutlet weak var chartNumberLabel: UILabel!
     
@@ -32,6 +32,9 @@ class AlbumGridCell: UICollectionViewCell {
     }
     
     func configureUI() {
+        
+        albumArtView.layer.cornerRadius = 4
+        
         layer.cornerRadius = 4
         layer.masksToBounds = false
         backgroundColor = .white

@@ -48,6 +48,11 @@ class AlbumViewController: UIViewController {
             albumArtView.image = UIImage(named: "placeholder-album")
         }
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openArtist))
+        tapGesture.numberOfTapsRequired = 1
+        
+        artistLabel.addGestureRecognizer(tapGesture)
+        
     }
     
     func loadTracks() {
@@ -105,6 +110,22 @@ class AlbumViewController: UIViewController {
         self.present(navController!, animated: true, completion: nil)
         
     }
+    
+    // @objc annotation to make method available for #selector
+    @objc func openArtist() {
+        
+        // TODO: Improve
+        
+        if let artistId = album?.artistId {
+            let artist = Artist(name: album?.artist ?? "", artistId: (album?.artistId!)!, imageUrl: "")
+            
+            let artistVC = self.storyboard?.instantiateViewController(identifier: "ArtistVC") as! ArtistViewController
+            artistVC.artist = artist
+            navigationController?.pushViewController(artistVC, animated: true)
+        }
+        
+    }
+    
     
 }
 

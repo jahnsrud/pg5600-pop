@@ -22,7 +22,7 @@ class ArtistViewController: UIViewController {
         collectionView.register(UINib(nibName: "AlbumGridCell", bundle: nil), forCellWithReuseIdentifier: "GridCell")
         collectionView.delegate = self
         collectionView.dataSource = self
-        
+                
         loadDetails()
         
     }

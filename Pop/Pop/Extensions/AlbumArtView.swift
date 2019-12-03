@@ -24,9 +24,9 @@ class AlbumArtView: UIImageView {
     }
     
     func applyStyle() {
-        // self.layer.cornerRadius = 4
+        self.layer.cornerRadius = 4
         self.layer.masksToBounds = true
-        // self.layer.borderWidth = 1
+        self.layer.borderWidth = 1
         self.layer.borderColor = UIColor(named: "AlbumArtBorder")?.cgColor
         
     }

@@ -13,7 +13,7 @@ class AlbumListCell: UICollectionViewCell {
     
     @IBOutlet weak var albumLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
-    @IBOutlet weak var albumArtView: AlbumArtView!
+    @IBOutlet weak var albumArtView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

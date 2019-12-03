@@ -14,6 +14,7 @@ struct Album: Codable {
     let albumArtUrl: String?
     let yearReleased: String
     let identifier: String
+    let artistId: String?
     let genre: String?
 
     
@@ -23,6 +24,7 @@ struct Album: Codable {
         case albumArtUrl = "strAlbumThumb"
         case yearReleased = "intYearReleased"
         case identifier = "idAlbum"
+        case artistId = "idArtist"
         case genre = "strGenre"
         
     }

@@ -32,7 +32,6 @@ class FavoriteTableViewCell: UITableViewCell {
         }
         
         albumArtView.kf.setImage(with: URL(string: favorite.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
-        albumArtView.layer.cornerRadius = 4
         
     }
     

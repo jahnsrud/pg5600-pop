@@ -30,6 +30,7 @@ class SearchCell: UITableViewCell {
         titleLabel.text = album.title
         descriptionLabel.text = album.artist
         albumArtView.kf.setImage(with: URL(string: album.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
