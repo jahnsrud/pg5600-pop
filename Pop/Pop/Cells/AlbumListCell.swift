@@ -24,11 +24,13 @@ class AlbumListCell: UICollectionViewCell {
         albumLabel.text = album.title
         artistLabel.text = album.artist
         albumArtView.kf.setImage(with: URL(string: album.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
+        albumArtView.layer.cornerRadius = 4
         
         backgroundColor = .systemBackground
         
         layer.masksToBounds = false
-        backgroundColor = .white
+        layer.cornerRadius = 4
+        
         layer.shadowColor = UIColor.lightGray.cgColor
         layer.shadowOpacity = 0.2
         layer.shadowOffset = CGSize(width: 0, height: 1)

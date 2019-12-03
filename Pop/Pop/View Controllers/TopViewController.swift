@@ -25,16 +25,20 @@ class TopViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureCollectionView()
+        checkFirstLaunch()
+        
+        updateLayout()
+        getTopAlbums()
+        
+    }
+    
+    func configureCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
         
         collectionView.register(UINib(nibName: "AlbumGridCell", bundle: nil), forCellWithReuseIdentifier: "GridCell")
         collectionView.register(UINib(nibName: "AlbumListCell", bundle: nil), forCellWithReuseIdentifier: "ListCell")
-        
-        checkFirstLaunch()
-        
-        updateLayout()
-        getData()
         
     }
     
@@ -50,7 +54,7 @@ class TopViewController: UIViewController {
         
     }
     
-    func getData() {
+    func getTopAlbums() {
         
         let url = "\(musicApiBaseUrl)mostloved.php?format=album"
         
@@ -99,6 +103,16 @@ class TopViewController: UIViewController {
         print("Switching to \(layoutType)")
         
         updateLayout()
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            self.collectionView.transform = CGAffineTransform(scaleX: 0.94, y: 0.94)
+            
+        }, completion: { _ in
+            
+            UIView.animate(withDuration: 0.1, animations: {
+                       self.collectionView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }, completion: nil)})
+        
         
         // Scroll to top to avoid confusion
         collectionView.setContentOffset(CGPoint.zero, animated: true)
@@ -186,7 +200,7 @@ extension TopViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if layoutType == .list {
-            return CGSize(width: collectionView.bounds.size.width-30, height: 70)
+            return CGSize(width: collectionView.bounds.size.width-30, height: 74)
         } else {
             return CGSize(width: (collectionView.bounds.size.width/2)-24, height: 240)
         }
