@@ -55,10 +55,8 @@ class AlbumViewController: UIViewController {
         if let albumId = album?.identifier {
             
             let url = "\(musicApiBaseUrl)track.php?m=\(albumId)"
-            
-            let handler = NetworkClient()
-            
-            handler.fetch(url: URL(string: url)!, completionHandler: { data, response, error in
+                        
+            NetworkClient().fetch(url: URL(string: url)!, completionHandler: { data, response, error in
                 
                 if let fetchError = error {
                     print("Error: \(fetchError.localizedDescription)")

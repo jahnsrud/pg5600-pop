@@ -68,9 +68,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     func searchAlbums(query: String) {
         
         let url = "\(musicApiBaseUrl)searchalbum.php?a=\(query)"
-        let handler = NetworkClient()
         
-        handler.fetch(url: URL(string: url)!, completionHandler: { data, response, error in
+        NetworkClient().fetch(url: URL(string: url)!, completionHandler: { data, response, error in
             
             if let fetchError = error {
                 print("Error: \(fetchError.localizedDescription)")
@@ -109,9 +108,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         print("Searching for: \(query)")
         
         let url = "\(musicApiBaseUrl)search.php?s=\(query)"
-        let handler = NetworkClient()
         
-        handler.fetch(url: URL(string: url)!, completionHandler: { data, response, error in
+        NetworkClient().fetch(url: URL(string: url)!, completionHandler: { data, response, error in
             
             if let fetchError = error {
                 print("Error: \(fetchError.localizedDescription)")

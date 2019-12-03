@@ -150,13 +150,11 @@ class FavoritesViewController: UIViewController {
             // Remember to only request music
             let url = "\(suggestionsApiBaseUrl)similar?q=\(getArtistsFormatted())?type=music&k=\(suggestionsApiKey)"
             print("Request URL: \(url)")
-            
-            let handler = NetworkClient()
-            
+                        
             self.suggestedArtists.removeAll()
             self.suggestionsCollectionView.reloadData(animated: true)
             
-            handler.fetch(url: URL(string: url)!, completionHandler: { data, response, error in
+            NetworkClient().fetch(url: URL(string: url)!, completionHandler: { data, response, error in
                 
                 if let fetchError = error {
                     print("Error: \(fetchError.localizedDescription)")

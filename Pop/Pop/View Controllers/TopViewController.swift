@@ -53,10 +53,8 @@ class TopViewController: UIViewController {
     func getData() {
         
         let url = "\(musicApiBaseUrl)mostloved.php?format=album"
-        
-        let handler = NetworkClient()
-        
-        handler.fetch(url: URL(string: url)!, completionHandler: { data, response, error in
+                
+        NetworkClient().fetch(url: URL(string: url)!, completionHandler: { data, response, error in
             
             if (error != nil) {
                 print("Error: \(error?.localizedDescription ?? "Something went wrong.")")
