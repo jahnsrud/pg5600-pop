@@ -10,7 +10,7 @@ import Foundation
 
 struct Artist: Codable {
     let name: String
-    let artistId: String
+    let artistId: String?
     let imageUrl: String
     
     private enum CodingKeys: String, CodingKey {

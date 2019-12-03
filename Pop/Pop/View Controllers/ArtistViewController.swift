@@ -22,67 +22,76 @@ class ArtistViewController: UIViewController {
         collectionView.register(UINib(nibName: "AlbumGridCell", bundle: nil), forCellWithReuseIdentifier: "GridCell")
         collectionView.delegate = self
         collectionView.dataSource = self
-                
+        
         loadDetails()
         
     }
     
     func loadDetails() {
         
+        var fetchUrl = ""
+        
         if let artistId = artist?.artistId {
+            fetchUrl = "\(musicApiBaseUrl)album.php?i=\(artistId)"
             
-            let url = "\(musicApiBaseUrl)album.php?i=\(artistId)"
+        } else if var name = artist?.name {
             
-            NetworkClient().fetch(url: URL(string: url)!, completionHandler: { data, response, error in
+            name = name.replacingOccurrences(of: " ", with: "+").lowercased()
+            fetchUrl = "\(musicApiBaseUrl)searchalbum.php?s=\(name)"
+            
+        } else {
+            print("Invalid arguments.")
+            return
+        }
+        
+        NetworkClient().fetch(url: URL(string: fetchUrl)!, completionHandler: { data, response, error in
+            
+            if let fetchError = error {
+                print("Error: \(fetchError.localizedDescription)")
+                return
+            }
+            
+            do {
                 
-                if let fetchError = error {
-                    print("Error: \(fetchError.localizedDescription)")
-                    return
-                }
-                
-                do {
+                if let jsonData = data {
+                    let response = try JSONDecoder().decode(AlbumSearchResponse.self, from: jsonData)
                     
-                    if let jsonData = data {
-                        let response = try JSONDecoder().decode(AlbumSearchResponse.self, from: jsonData)
-                        
-                        for album in response.album! {
-                            print("Album: \(album.title)")
-                            self.albums.append(album)
-                            
-                        }
-                        
-                        DispatchQueue.main.async {
-                            self.collectionView.reloadData(animated: true)
-                            
-                        }
+                    for album in response.album! {
+                        print("Album: \(album.title)")
+                        self.albums.append(album)
                         
                     }
                     
-                    
-                } catch let error {
-                    print(error)
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData(animated: true)
+                        
+                    }
                     
                 }
                 
                 
+            } catch let error {
+                print(error)
                 
-            })
+            }
             
-        }
+            
+            
+        })
         
     }
-    
-    
+ 
     func presentAlbum(_ album: Album) {
         
         let albumVC = self.storyboard?.instantiateViewController(identifier: "AlbumVC") as! AlbumViewController
         albumVC.album = album
         
         navigationController?.pushViewController(albumVC, animated: true)
+
     }
     
-    
 }
+
 
 extension ArtistViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

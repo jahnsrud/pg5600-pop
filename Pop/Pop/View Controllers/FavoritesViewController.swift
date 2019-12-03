@@ -306,7 +306,7 @@ extension FavoritesViewController: UITableViewDelegate {
         
     }
     
-  
+    
     
 }
 
@@ -341,6 +341,13 @@ extension FavoritesViewController: UICollectionViewDelegate {
         
         let cell = collectionView.cellForItem(at: indexPath) as! ArtistCell
         cell.spin()
+        
+        let suggestion = suggestedArtists[indexPath.item]
+        let artist = Artist(name: suggestion.name, artistId: nil, imageUrl: "")
+        
+        let artistVC = self.storyboard?.instantiateViewController(identifier: "ArtistVC") as! ArtistViewController
+        artistVC.artist = artist
+        navigationController?.pushViewController(artistVC, animated: true)
         
         
     }

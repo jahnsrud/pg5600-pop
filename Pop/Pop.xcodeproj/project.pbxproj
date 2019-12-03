@@ -216,9 +216,9 @@
 				28AC33FB23676F6A003F3D4D /* AlbumViewController.swift */,
 				283FA28E23678D8F002897AF /* FavoritesViewController.swift */,
 				2868E2AE236860D400683CF0 /* SearchViewController.swift */,
-				28A496A2236A208D00914085 /* FirstLaunchViewController.swift */,
 				28479301236F1F1C00097B99 /* ArtistViewController.swift */,
 				28A496A4236A27D400914085 /* TrackViewController.swift */,
+				28A496A2236A208D00914085 /* FirstLaunchViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

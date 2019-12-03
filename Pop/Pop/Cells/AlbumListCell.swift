@@ -36,11 +36,9 @@ class AlbumListCell: UICollectionViewCell {
         
         layer.masksToBounds = false
         layer.cornerRadius = 4
-        if traitCollection.userInterfaceStyle == .dark {
+        if traitCollection.userInterfaceStyle == .light {
             addShadow()
         }
-        
-        
         
         
     }
