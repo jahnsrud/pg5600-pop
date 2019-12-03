@@ -209,12 +209,12 @@ class FavoritesViewController: UIViewController {
          
          } */
         
-        let convertedTrack = Track(name: favorite.track!,
-                                   duration: favorite.duration!,
-                                   artist: favorite.artist!,
+        let convertedTrack = Track(name: favorite.track ?? "",
+                                   duration: favorite.duration ?? "",
+                                   artist: favorite.artist ?? "",
                                    videoUrl: favorite.videoUrl,
                                    albumArtUrl: favorite.albumArtUrl,
-                                   trackId: favorite.trackId!)
+                                   trackId: favorite.trackId ?? "")
         
         return convertedTrack
         
@@ -267,6 +267,21 @@ extension FavoritesViewController: UITableViewDataSource {
 
 extension FavoritesViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title:  "", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            
+            self.deleteFavorite(indexPath: indexPath)
+            
+            // Resets row position
+            success(true)
+            
+        })
+        deleteAction.image = UIImage(systemName: "star.slash")
+        deleteAction.backgroundColor = .red
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -309,14 +324,7 @@ extension FavoritesViewController: UITableViewDelegate {
         
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            deleteFavorite(indexPath: indexPath)
-            
-            
-        }
-    }
+  
     
 }
 
@@ -369,6 +377,7 @@ extension FavoritesViewController: NSFetchedResultsControllerDelegate {
     
     // https://medium.com/@KentaKodashima/ios-core-data-tutorial-part-2-41f6740865d5
     // Subscribes to changes and updates our UI accordingly.
+    // Only updates suggestions on insertion/deletion
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
@@ -377,15 +386,16 @@ extension FavoritesViewController: NSFetchedResultsControllerDelegate {
         switch type {
         case .insert:
             tableView.insertRows(at: [cellIndex], with: .fade)
+            loadSuggestions()
             
         case .delete:
             tableView.deleteRows(at: [cellIndex], with: .left)
+            loadSuggestions()
             
         default:
             break
         }
         
-        // Update our artist suggestions when data changes
-        loadSuggestions()
+        
     }
 }
