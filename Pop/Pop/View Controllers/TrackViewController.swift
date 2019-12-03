@@ -113,7 +113,6 @@ class TrackViewController: UIViewController {
         favorite.trackId = track?.trackId
         favorite.sortId = 9999
         
-        
         DatabaseManager.saveContext()
         
         displayFavoritedStatus()

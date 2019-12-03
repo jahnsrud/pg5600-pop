@@ -195,30 +195,12 @@ class FavoritesViewController: UIViewController {
         let navController = self.storyboard?.instantiateViewController(identifier: "TrackVC")
         let vc = navController?.children.first as! TrackViewController
         
-        vc.track = convertFavoriteToTrack(favorite)
+        vc.track = favorite.toTrack()
         
         self.present(navController!, animated: true, completion: nil)
         
     }
     
-    func convertFavoriteToTrack(_ favorite: Favorite) -> Track {
-        
-        // TODO: FIX Don't unwrap
-        
-        /* guard let favoriteTrack = favorite.track else {
-         
-         } */
-        
-        let convertedTrack = Track(name: favorite.track ?? "",
-                                   duration: favorite.duration ?? "",
-                                   artist: favorite.artist ?? "",
-                                   videoUrl: favorite.videoUrl,
-                                   albumArtUrl: favorite.albumArtUrl,
-                                   trackId: favorite.trackId ?? "")
-        
-        return convertedTrack
-        
-    }
     
     func displayEmptyState() {
         
@@ -333,6 +315,7 @@ extension FavoritesViewController: UICollectionViewDataSource {
         
         if suggestedArtists.count > 0 {
             suggestionsView.isHidden = false
+            
         } else {
             suggestionsView.isHidden = true
         }

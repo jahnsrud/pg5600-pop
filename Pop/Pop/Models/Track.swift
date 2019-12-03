@@ -31,3 +31,24 @@ struct Track: Codable {
 struct TracksResponse: Codable {
     var track: [Track]
 }
+
+extension Favorite {
+    func toTrack() -> Track {
+             
+             // TODO: FIX Don't unwrap
+             
+             /* guard let favoriteTrack = favorite.track else {
+              
+              } */
+             
+             let convertedTrack = Track(name: self.track ?? "",
+                                        duration: self.duration ?? "",
+                                        artist: self.artist ?? "",
+                                        videoUrl: self.videoUrl,
+                                        albumArtUrl: self.albumArtUrl,
+                                        trackId: self.trackId ?? "")
+             
+             return convertedTrack
+             
+         }
+}
