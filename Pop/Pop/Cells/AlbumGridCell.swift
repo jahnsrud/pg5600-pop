@@ -29,6 +29,7 @@ class AlbumGridCell: UICollectionViewCell {
         
         configureUI()
         
+        
     }
     
     func configureUI() {
@@ -44,6 +45,8 @@ class AlbumGridCell: UICollectionViewCell {
         
         chartNumberView.layer.cornerRadius = chartNumberView.bounds.size.width/2
         chartNumberView.isHidden = true
+        
+        albumArtView.roundCorners([.topLeft, .topRight], radius: 4)
 
     }
     
@@ -69,6 +72,7 @@ class AlbumGridCell: UICollectionViewCell {
         }
     }
     
+    
     override var isHighlighted: Bool {
         didSet {
             if self.isHighlighted {
@@ -80,4 +84,16 @@ class AlbumGridCell: UICollectionViewCell {
     }
     
     
+}
+
+extension UIView {
+
+    // https://stackoverflow.com/a/50289822
+    
+    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+            clipsToBounds = true
+            layer.cornerRadius = radius
+            layer.maskedCorners = CACornerMask(rawValue: corners.rawValue)
+        
+    }
 }
