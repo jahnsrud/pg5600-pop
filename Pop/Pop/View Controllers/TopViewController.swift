@@ -53,7 +53,7 @@ class TopViewController: UIViewController {
     func getData() {
         
         let url = "\(musicApiBaseUrl)mostloved.php?format=album"
-                
+        
         NetworkClient().fetch(url: URL(string: url)!, completionHandler: { data, response, error in
             
             if (error != nil) {
@@ -63,16 +63,15 @@ class TopViewController: UIViewController {
             
             do {
                 
-                /*guard let responseData = data else {
-                 }*/
-                
-                let response = try JSONDecoder().decode(Response.self, from: data!)
-                
-                for album in response.loved {
-                    self.albums.append(album)
+                if let jsonData = data {
+                    let response = try JSONDecoder().decode(Response.self, from: jsonData)
+                    
+                    for album in response.loved {
+                        self.albums.append(album)
+                    }
+                    
+                    self.collectionView.reloadData(animated: true)
                 }
-                
-                self.collectionView.reloadData(animated: true)
                 
                 
             } catch let error {
@@ -111,11 +110,11 @@ class TopViewController: UIViewController {
         let savedLayoutType: String = UserDefaults.standard.object(forKey: "layoutType") as! String
         
         if savedLayoutType == "grid" {
-            layoutBarButtonItem.image = UIImage(named: "icon-list")
+            layoutBarButtonItem.image = UIImage(systemName: "list.bullet")
             layoutType = .grid
             
         } else {
-            layoutBarButtonItem.image = UIImage(named: "icon-grid")
+            layoutBarButtonItem.image = UIImage(systemName: "square.grid.2x2")
             layoutType = .list
             
         }
@@ -185,7 +184,7 @@ extension TopViewController: UICollectionViewDelegate {
 
 extension TopViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-                
+        
         if layoutType == .list {
             return CGSize(width: collectionView.bounds.size.width-30, height: 70)
         } else {

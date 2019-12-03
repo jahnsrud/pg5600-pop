@@ -21,7 +21,7 @@ class FavoritesViewController: UIViewController {
     var suggestedArtists = [SuggestedArtist]()
     
     var fetchedResultsController: NSFetchedResultsController<Favorite>!
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +49,7 @@ class FavoritesViewController: UIViewController {
         loadFavorites()
         
     }
-        
+    
     func loadFavorites() {
         
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Favorite")
@@ -88,7 +88,7 @@ class FavoritesViewController: UIViewController {
             
             DatabaseManager.persistentContainer.viewContext.delete(favorite)
             DatabaseManager.saveContext()
-                        
+            
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -134,7 +134,7 @@ class FavoritesViewController: UIViewController {
                 query += "\(artist.replacingOccurrences(of: " ", with: "+"))%2C+"
             }
         }
-
+        
         
         return query
     }
@@ -150,7 +150,7 @@ class FavoritesViewController: UIViewController {
             // Remember to only request music
             let url = "\(suggestionsApiBaseUrl)similar?q=\(getArtistsFormatted())?type=music&k=\(suggestionsApiKey)"
             print("Request URL: \(url)")
-                        
+            
             self.suggestedArtists.removeAll()
             self.suggestionsCollectionView.reloadData(animated: true)
             
@@ -162,14 +162,17 @@ class FavoritesViewController: UIViewController {
                 }
                 
                 do {
-                    
-                    let response = try JSONDecoder().decode(SuggestionsResponse.self, from: data!)
-                    
-                    for suggestion in response.similar.results {                        
-                        self.suggestedArtists.append(suggestion)
+                    if let jsonData = data {
+                        
+                        let response = try JSONDecoder().decode(SuggestionsResponse.self, from: jsonData)
+                        
+                        for suggestion in response.similar.results {                        
+                            self.suggestedArtists.append(suggestion)
+                        }
+                        
+                        self.suggestionsCollectionView.reloadData(animated: true)
+                        
                     }
-                    
-                    self.suggestionsCollectionView.reloadData(animated: true)
                     
                     
                     
@@ -203,8 +206,8 @@ class FavoritesViewController: UIViewController {
         // TODO: FIX Don't unwrap
         
         /* guard let favoriteTrack = favorite.track else {
-            
-        } */
+         
+         } */
         
         let convertedTrack = Track(name: favorite.track!,
                                    duration: favorite.duration!,

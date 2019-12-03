@@ -55,7 +55,7 @@ class AlbumViewController: UIViewController {
         if let albumId = album?.identifier {
             
             let url = "\(musicApiBaseUrl)track.php?m=\(albumId)"
-                        
+            
             NetworkClient().fetch(url: URL(string: url)!, completionHandler: { data, response, error in
                 
                 if let fetchError = error {
@@ -65,17 +65,22 @@ class AlbumViewController: UIViewController {
                 
                 do {
                     
-                    let response = try JSONDecoder().decode(TracksResponse.self, from: data!)
-                    
-                    for var track in response.track {
-                        // print("Track: \(track.name)")
-                        track.albumArtUrl = self.album?.albumArtUrl
-                        self.tracks.append(track)
+                    if let jsonData = data {
                         
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+                        
+                        let response = try JSONDecoder().decode(TracksResponse.self, from: jsonData)
+                        
+                        for var track in response.track {
+                            // print("Track: \(track.name)")
+                            track.albumArtUrl = self.album?.albumArtUrl
+                            self.tracks.append(track)
+                            
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+                        }
+                        
                     }
                     
                     

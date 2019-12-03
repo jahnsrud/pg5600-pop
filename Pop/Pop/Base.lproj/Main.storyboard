@@ -48,18 +48,16 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Top" id="d0X-Kk-LdT">
-                        <rightBarButtonItems>
-                            <barButtonItem title="Item" image="icon-list" id="SSU-W7-u4Z">
-                                <connections>
-                                    <action selector="switchLayout:" destination="BYZ-38-t0r" id="96K-Ht-z0H"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="/beta/" id="HnI-Vo-9OS">
-                                <connections>
-                                    <segue destination="WA1-OW-ALm" kind="presentation" id="zza-hg-RS1"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" title="/beta/" image="gear" catalog="system" id="HnI-Vo-9OS">
+                            <connections>
+                                <segue destination="WA1-OW-ALm" kind="presentation" id="zza-hg-RS1"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="list.dash" catalog="system" id="SSU-W7-u4Z">
+                            <connections>
+                                <action selector="switchLayout:" destination="BYZ-38-t0r" id="96K-Ht-z0H"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="edW-4i-pvr" id="Bcv-gv-2ql"/>
@@ -558,7 +556,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y81-RF-GZ5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="TrackVC" automaticallyAdjustsScrollViewInsets="NO" id="Tdp-sQ-TrQ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="kpU-A3-HcK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kpU-A3-HcK">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -572,9 +570,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gear" catalog="system" width="64" height="58"/>
         <image name="icon-close" width="33" height="33"/>
-        <image name="icon-list" width="24" height="24"/>
         <image name="icon-pop-text" width="422" height="459"/>
+        <image name="list.dash" catalog="system" width="64" height="42"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="music.note.list" catalog="system" width="64" height="56"/>
         <image name="placeholder-album" width="333" height="333"/>

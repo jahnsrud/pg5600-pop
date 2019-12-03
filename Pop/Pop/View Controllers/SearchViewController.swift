@@ -78,22 +78,24 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             
             do {
                 
-                // TODO: Don't force unwrap
-                let response = try JSONDecoder().decode(AlbumSearchResponse.self, from: data!)
-                
-                if response.album != nil {
-                    for album in response.album! {
-                        print("Found album: \(album.title)")
-                        self.albumResults.append(album)
+                if let jsonData = data {
+                    
+                    let response = try JSONDecoder().decode(AlbumSearchResponse.self, from: jsonData)
+                    
+                    if response.album != nil {
+                        for album in response.album! {
+                            print("Found album: \(album.title)")
+                            self.albumResults.append(album)
+                        }
+                    } else {
+                        print("Search: Results are empty")
                     }
-                } else {
-                    print("Search: Results are empty")
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
+                    }
+                    
                 }
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
-                }
-                
                 
             } catch let error {
                 print(error)
@@ -118,20 +120,23 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             
             do {
                 
-                let response = try JSONDecoder().decode(ArtistResponse.self, from: data!)
-                
-                if response.artists != nil {
-                    for artist in response.artists! {
-                        print("Found artist: \(artist.name) with \(artist.imageUrl)")
-                        self.artistResults.append(artist)
+                if let jsonData = data {
+                    
+                    let response = try JSONDecoder().decode(ArtistResponse.self, from: jsonData)
+                    
+                    if response.artists != nil {
+                        for artist in response.artists! {
+                            print("Found artist: \(artist.name) with \(artist.imageUrl)")
+                            self.artistResults.append(artist)
+                        }
+                    } else {
+                        print("Search: Results are empty")
                     }
-                } else {
-                    print("Search: Results are empty")
-                }
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
-                    // self.tableView.reloadData()
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
+                        // self.tableView.reloadData()
+                    }
                 }
                 
                 
@@ -165,7 +170,7 @@ extension SearchViewController: UITableViewDataSource {
         if section == 0 {
             return albumResults.count
         }
-                
+        
         return artistResults.count
     }
     
