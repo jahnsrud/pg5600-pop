@@ -122,7 +122,7 @@ class TopViewController: UIViewController {
             
         }
         
-        collectionView.reloadData(animated: true)
+        collectionView.reloadData(animated: false)
         
     }
     
@@ -191,7 +191,7 @@ extension TopViewController: UICollectionViewDelegateFlowLayout {
         if layoutType == .list {
             return CGSize(width: collectionView.bounds.size.width-30, height: 70)
         } else {
-            return CGSize(width: (collectionView.bounds.size.width/2)-30, height: 230)
+            return CGSize(width: (collectionView.bounds.size.width/2)-24, height: 240)
         }
     }
 }

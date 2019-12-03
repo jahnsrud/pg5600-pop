@@ -19,8 +19,8 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="edW-4i-pvr">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="z2F-bV-JiZ">
+                                <color key="backgroundColor" red="0.99215686274509807" green="0.99215686274509807" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="16" minimumInteritemSpacing="0.0" id="z2F-bV-JiZ">
                                     <size key="itemSize" width="150" height="150"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -237,6 +237,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aEJ-oa-mV9" customClass="YoutubePlayerView" customModule="YoutubePlayerView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="370"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1F-7a-LeJ" customClass="ActionButton" customModule="Pop" customModuleProvider="target">
                                 <rect key="frame" x="16" y="812" width="382" height="50"/>
                                 <constraints>
@@ -248,7 +253,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xj2-fv-o4M">
-                                <rect key="frame" x="0.0" y="88" width="414" height="129"/>
+                                <rect key="frame" x="0.0" y="370" width="414" height="129"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afg-rL-ksX">
@@ -275,22 +280,14 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.92734087880000005" green="0.92191783270000005" blue="0.93276392490000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aEJ-oa-mV9">
-                                <rect key="frame" x="0.0" y="217" width="414" height="233"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcC-gb-nVJ">
+                                <rect key="frame" x="154" y="543" width="106" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7o-OB-5JY">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <wkWebViewConfiguration key="configuration">
-                                            <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                            <wkPreferences key="preferences"/>
-                                        </wkWebViewConfiguration>
-                                    </wkWebView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
+                                <state key="normal" title="Open in Spotify"/>
+                                <connections>
+                                    <action selector="openInSpotify:" destination="ub5-0r-fs4" eventType="touchUpInside" id="1Jt-pW-ilz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -311,8 +308,8 @@
                         <outlet property="artistLabel" destination="Eg5-vi-F3P" id="8Fm-Pt-dYk"/>
                         <outlet property="durationLabel" destination="afg-rL-ksX" id="XSY-qo-yxw"/>
                         <outlet property="favoriteButton" destination="W1F-7a-LeJ" id="HZe-Le-0X2"/>
+                        <outlet property="playerView" destination="aEJ-oa-mV9" id="gRe-PA-5oN"/>
                         <outlet property="titleLabel" destination="ca8-SQ-9y1" id="b6Z-hu-keH"/>
-                        <outlet property="webView" destination="h7o-OB-5JY" id="sKw-f6-dh4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wRt-ye-Tqt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -561,7 +558,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y81-RF-GZ5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="TrackVC" automaticallyAdjustsScrollViewInsets="NO" id="Tdp-sQ-TrQ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kpU-A3-HcK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="kpU-A3-HcK">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

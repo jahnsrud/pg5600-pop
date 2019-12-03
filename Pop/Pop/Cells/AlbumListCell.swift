@@ -26,22 +26,14 @@ class AlbumListCell: UICollectionViewCell {
         albumArtView.kf.setImage(with: URL(string: album.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
         
         backgroundColor = .systemBackground
-        layer.cornerRadius = 12
         
-        
-        /*
-        Border testing: 
-        contentView.layer.borderWidth = 1.0
-        contentView.layer.borderColor = UIColor.clear.cgColor
-        contentView.layer.masksToBounds = true;
-        
+        layer.masksToBounds = false
+        backgroundColor = .white
         layer.shadowColor = UIColor.lightGray.cgColor
-        layer.shadowOffset = CGSize(width:0,height: 2.0)
+        layer.shadowOpacity = 0.2
+        layer.shadowOffset = CGSize(width: 0, height: 1)
         layer.shadowRadius = 2.0
-        layer.shadowOpacity = 1.0
-        layer.masksToBounds = false;
         layer.shadowPath = UIBezierPath(roundedRect:bounds, cornerRadius:contentView.layer.cornerRadius).cgPath
-        */
     }
     
     override var isHighlighted: Bool {

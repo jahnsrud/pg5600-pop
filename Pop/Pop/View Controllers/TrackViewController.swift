@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import WebKit
+import YoutubePlayerView
 import CoreData
 
 class TrackViewController: UIViewController {
@@ -15,7 +15,7 @@ class TrackViewController: UIViewController {
     var track: Track?
     private var favorite: Favorite?
     
-    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var playerView: YoutubePlayerView!
     @IBOutlet weak var favoriteButton: UIButton!
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -49,6 +49,23 @@ class TrackViewController: UIViewController {
             
             if videoUrl.count > 0 {
                 // webView.load(URLRequest(url: URL(string: videoUrl)!))
+                
+                let playbackOptions: [String: Any] = [
+                    "controls": 0,
+                    "modestbranding": 0,
+                    "playsinline": 1,
+                    "rel": 0,
+                    "showinfo": 0,
+                    "autoplay": 1,
+                    "origin": "https://youtube.com"
+                ]
+                
+                // TODO: IMPROVE
+                let videoId = videoUrl.replacingOccurrences(of: "https://www.youtube.com/watch?v=", with: "")
+                
+                playerView.loadWithVideoId(videoId, with: playbackOptions)
+                
+                
             }
             
         }
@@ -66,6 +83,12 @@ class TrackViewController: UIViewController {
             addTrackToDatabase()
             
         }
+        
+    }
+    
+    @IBAction func openInSpotify(_ sender: Any) {
+        
+        UIApplication.shared.open(URL(string: "spotify://")!, options: [:], completionHandler: nil)
         
     }
     
@@ -120,8 +143,12 @@ class TrackViewController: UIViewController {
         DispatchQueue.main.async {
             if self.trackIsFavorited() {
                 self.favoriteButton.setTitle("Remove", for: .normal)
+                self.favoriteButton.setImage(UIImage(systemName: "star.slash"), for: .normal)
+                
+                
             } else {
                 self.favoriteButton.setTitle("Favorite", for: .normal)
+                self.favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
             }
         }
     }
