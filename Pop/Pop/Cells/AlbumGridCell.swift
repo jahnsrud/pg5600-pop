@@ -37,7 +37,7 @@ class AlbumGridCell: UICollectionViewCell {
         
         layer.cornerRadius = 4
         layer.masksToBounds = false
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         layer.shadowColor = UIColor.lightGray.cgColor
         layer.shadowOpacity = 0.3
         layer.shadowOffset = CGSize(width: 0, height: 1)

@@ -32,7 +32,7 @@ class AlbumListCell: UICollectionViewCell {
         layer.cornerRadius = 4
         
         layer.shadowColor = UIColor.lightGray.cgColor
-        layer.shadowOpacity = 0.2
+        layer.shadowOpacity = 0.25
         layer.shadowOffset = CGSize(width: 0, height: 1)
         layer.shadowRadius = 2.0
         layer.shadowPath = UIBezierPath(roundedRect:bounds, cornerRadius:contentView.layer.cornerRadius).cgPath
