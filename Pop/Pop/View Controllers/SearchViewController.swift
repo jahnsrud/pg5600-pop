@@ -157,6 +157,15 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         navigationController?.pushViewController(albumVC, animated: true)
     }
     
+    func presentArtist(_ artist: Artist) {
+        let artistVC = self.storyboard?.instantiateViewController(identifier: "ArtistVC") as! ArtistViewController
+        artistVC.artist = artist
+        
+        navigationController?.pushViewController(artistVC, animated: true)
+        
+    }
+    
+    
 }
 
 extension SearchViewController: UITableViewDataSource {
@@ -220,6 +229,9 @@ extension SearchViewController: UITableViewDelegate {
             let album = albumResults[indexPath.row]
             presentAlbum(album)
             
+        } else if indexPath.section == 1 {
+            let artist = artistResults[indexPath.row]
+            presentArtist(artist)
         }
         
     }

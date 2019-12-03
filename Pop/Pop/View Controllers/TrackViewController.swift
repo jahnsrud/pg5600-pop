@@ -57,7 +57,6 @@ class TrackViewController: UIViewController {
             print(videoUrl)
             
             if videoUrl.count > 0 {
-                // webView.load(URLRequest(url: URL(string: videoUrl)!))
                 
                 let playbackOptions: [String: Any] = [
                     "controls": 0,
