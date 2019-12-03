@@ -25,6 +25,8 @@ class TopViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.backgroundColor = UIColor(named: "Background")
+        
         configureCollectionView()
         checkFirstLaunch()
         

@@ -33,22 +33,41 @@ class AlbumGridCell: UICollectionViewCell {
     
     func configureUI() {
         
-        albumArtView.layer.cornerRadius = 4
+        backgroundColor = UIColor(named: "AlbumCellBackground")
         
         layer.cornerRadius = 4
         layer.masksToBounds = false
-        backgroundColor = .systemBackground
-        layer.shadowColor = UIColor.lightGray.cgColor
-        layer.shadowOpacity = 0.3
-        layer.shadowOffset = CGSize(width: 0, height: 1)
-        layer.shadowRadius = 2.0
-        layer.shadowPath = UIBezierPath(roundedRect:bounds, cornerRadius:contentView.layer.cornerRadius).cgPath
+        
+        if traitCollection.userInterfaceStyle == .light {
+            addShadow()
+        }
         
         chartNumberView.layer.cornerRadius = chartNumberView.bounds.size.width/2
         chartNumberView.isHidden = true
 
     }
     
+    func addShadow() {
+        layer.shadowColor = UIColor.lightGray.cgColor
+        layer.shadowOpacity = 0.3
+        layer.shadowOffset = CGSize(width: 0, height: 1)
+        layer.shadowRadius = 2.0
+        layer.shadowPath = UIBezierPath(roundedRect:bounds, cornerRadius:contentView.layer.cornerRadius).cgPath
+    }
+    
+    func removeShadow() {
+        layer.shadowOpacity = 0
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.userInterfaceStyle == .dark {
+            removeShadow()
+        } else {
+            addShadow()
+        }
+    }
     
     override var isHighlighted: Bool {
         didSet {
