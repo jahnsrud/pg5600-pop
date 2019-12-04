@@ -73,12 +73,9 @@ class AlbumViewController: UIViewController {
                 do {
                     
                     if let jsonData = data {
-                        
-                        
                         let response = try JSONDecoder().decode(TracksResponse.self, from: jsonData)
                         
                         for var track in response.track {
-                            // print("Track: \(track.name)")
                             track.albumArtUrl = self.album?.albumArtUrl
                             self.tracks.append(track)
                             
@@ -116,15 +113,11 @@ class AlbumViewController: UIViewController {
     // @objc annotation to make method available for #selector
     @objc func openArtist() {
         
-        // TODO: Improve
+        let artist = Artist(name: album?.artist ?? "", artistId: (album?.artistId!)!, imageUrl: "")
         
-        if let artistId = album?.artistId {
-            let artist = Artist(name: album?.artist ?? "", artistId: (album?.artistId!)!, imageUrl: "")
-            
-            let artistVC = self.storyboard?.instantiateViewController(identifier: "ArtistVC") as! ArtistViewController
-            artistVC.artist = artist
-            navigationController?.pushViewController(artistVC, animated: true)
-        }
+        let artistVC = self.storyboard?.instantiateViewController(identifier: "ArtistVC") as! ArtistViewController
+        artistVC.artist = artist
+        navigationController?.pushViewController(artistVC, animated: true)
         
     }
     

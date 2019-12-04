@@ -174,9 +174,7 @@ class FavoritesViewController: UIViewController {
                         }
                         
                         self.suggestionsCollectionView.reloadData(animated: true)
-                        
                     }
-                    
                     
                     
                 } catch let error {

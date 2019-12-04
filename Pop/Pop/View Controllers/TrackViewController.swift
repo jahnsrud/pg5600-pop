@@ -31,7 +31,6 @@ class TrackViewController: UIViewController {
         setUI()
         displayTrack()
 
-        
     }
     
     func setUI() {
