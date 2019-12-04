@@ -14,8 +14,10 @@ class FavoritesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var suggestionsCollectionView: UICollectionView!
     @IBOutlet weak var suggestionsView: UIView!
+    @IBOutlet weak var suggestionDescriptionLabel: UILabel!
     @IBOutlet weak var editBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var emptyStateLabel: UILabel!
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
     var favorites = [Favorite]()
     var suggestedArtists = [SuggestedArtist]()
@@ -79,6 +81,7 @@ class FavoritesViewController: UIViewController {
         
     }
     
+    
     func deleteFavorite(indexPath: IndexPath) {
         
         let favorite = fetchedResultsController.object(at: indexPath)
@@ -114,9 +117,14 @@ class FavoritesViewController: UIViewController {
         if editing {
             self.editBarButtonItem.title = "Done"
             self.editBarButtonItem.style = .done
+            
+            displaySuggestions(false)
+            
         } else {
             self.editBarButtonItem.title = "Edit"
             self.editBarButtonItem.style = .plain
+            
+            displaySuggestions(true)
         }
         
         
@@ -221,6 +229,28 @@ class FavoritesViewController: UIViewController {
         }
     }
     
+    func displaySuggestions(_ shouldDisplay: Bool) {
+           
+           var constant = 0
+           
+           if shouldDisplay {
+               constant = 520
+               
+               suggestionDescriptionLabel.text = "SUGGESTIONS"
+               
+           } else {
+               constant = 630
+               suggestionDescriptionLabel.text = "Add favorites, and we'll suggest new artists 🎤"
+           }
+           
+           UIView.animate(withDuration: 0.35, animations: { () -> Void in
+               self.tableViewHeightConstraint.constant = CGFloat(constant)
+               self.view.layoutIfNeeded()
+           })
+           
+       }
+       
+    
     
 }
 
@@ -275,6 +305,7 @@ extension FavoritesViewController: UITableViewDelegate {
         
     }
     
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return favorites.count > 0 ? "Tracks" : ""
     }
@@ -307,18 +338,16 @@ extension FavoritesViewController: UITableViewDelegate {
         
     }
     
-    
-    
 }
 
 extension FavoritesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if suggestedArtists.count > 0 {
-            suggestionsView.isHidden = false
-            
+            displaySuggestions(true)
         } else {
-            suggestionsView.isHidden = true
+            displaySuggestions(false)
+            
         }
         
         return suggestedArtists.count
@@ -339,9 +368,6 @@ extension FavoritesViewController: UICollectionViewDataSource {
 
 extension FavoritesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let cell = collectionView.cellForItem(at: indexPath) as! ArtistCell
-        cell.spin()
         
         let suggestion = suggestedArtists[indexPath.item]
         let artist = Artist(name: suggestion.name, artistId: nil, imageUrl: "")
