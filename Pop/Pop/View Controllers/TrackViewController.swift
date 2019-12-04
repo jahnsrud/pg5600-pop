@@ -7,18 +7,19 @@
 //
 
 import UIKit
-import YoutubePlayerView
+import XCDYouTubeKit
 import CoreData
+import AVKit
 
 class TrackViewController: UIViewController {
     
     var track: Track?
     private var favorite: Favorite?
     
-    @IBOutlet weak var playerView: YoutubePlayerView!
+    @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var favoriteButton: UIButton!
     
-    @IBOutlet weak var metadataView: UIView!
+    @IBOutlet weak var metadataView: UIVisualEffectView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
@@ -26,9 +27,11 @@ class TrackViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        overrideUserInterfaceStyle = .dark
+        
         displayTrack()
         metadataView.layer.cornerRadius = 4
-        
+        metadataView.layer.masksToBounds = true
     }
     
     func displayTrack() {
@@ -51,35 +54,46 @@ class TrackViewController: UIViewController {
     }
     
     func startVideo() {
+        
         if var videoUrl = track?.videoUrl {
-            
+
             videoUrl = videoUrl.replacingOccurrences(of: "http://", with: "https://")
-            print(videoUrl)
+            let videoId = videoUrl.replacingOccurrences(of: "https://www.youtube.com/watch?v=", with: "")
             
-            if videoUrl.count > 0 {
+            XCDYouTubeClient.default().getVideoWithIdentifier(videoId) { [weak self] (video, error) in
                 
-                let playbackOptions: [String: Any] = [
-                    "controls": 0,
-                    "modestbranding": 1,
-                    "playsinline": 1,
-                    "rel": 0,
-                    "showinfo": 0,
-                    "autoplay": 1,
-                    "origin": "https://youtube.com"
-                ]
-                
-                // TODO: IMPROVE
-                let videoId = videoUrl.replacingOccurrences(of: "https://www.youtube.com/watch?v=", with: "")
-                
-                playerView.loadWithVideoId(videoId, with: playbackOptions)
-                
-                
+                if video != nil {
+                    let streamURLs = video?.streamURLs
+                    let streamURL = streamURLs?[XCDYouTubeVideoQualityHTTPLiveStreaming] ?? streamURLs?[NSNumber(value: XCDYouTubeVideoQuality.medium360.rawValue)] ?? streamURLs?[NSNumber(value: XCDYouTubeVideoQuality.small240.rawValue)]
+                    if let streamURL = streamURL {
+                        
+                        let player = AVPlayer(url: streamURL)
+                        player.play()
+                        
+                        let playerViewController = AVPlayerViewController()
+                        playerViewController.view.frame = self!.playerView.frame
+                        playerViewController.videoGravity = .resizeAspectFill
+                        playerViewController.showsPlaybackControls = false
+                        playerViewController.player = player
+                        
+                        // TODO: IMPROVE :)
+                        
+                        self!.addChild(playerViewController)
+                        self!.playerView.addSubview(playerViewController.view)
+                        self!.playerView.sendSubviewToBack(playerViewController.view)
+                        playerViewController.didMove(toParent: self)
+                        
+                        
+                        
+                    }
+                    
+                } else {
+                    self?.dismiss(animated: true)
+                }
             }
             
-        } else {
-            playerView.backgroundColor = .black
         }
-        
+     
     }
     
     @IBAction func favoriteAction(_ sender: Any) {

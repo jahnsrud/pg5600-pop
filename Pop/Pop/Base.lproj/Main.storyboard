@@ -277,67 +277,95 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aEJ-oa-mV9" customClass="YoutubePlayerView" customModule="YoutubePlayerView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="370"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="aEJ-oa-mV9">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1F-7a-LeJ" customClass="ActionButton" customModule="Pop" customModuleProvider="target">
-                                <rect key="frame" x="16" y="812" width="382" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="cxY-Ig-9sE"/>
-                                </constraints>
-                                <state key="normal" title="Favorite"/>
-                                <connections>
-                                    <action selector="favoriteAction:" destination="ub5-0r-fs4" eventType="touchUpInside" id="aq7-Cc-Baj"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xj2-fv-o4M">
-                                <rect key="frame" x="16" y="392" width="378" height="192"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afg-rL-ksX">
-                                        <rect key="frame" x="28" y="81" width="358" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" name="SubtitleColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eg5-vi-F3P">
-                                        <rect key="frame" x="28" y="56" width="358" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" name="SubtitleColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ca8-SQ-9y1">
-                                        <rect key="frame" x="28" y="24" width="358" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcC-gb-nVJ">
-                                        <rect key="frame" x="28" y="127" width="144" height="38"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.43747270110000003" green="0.63128167390000001" blue="0.63137620689999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                        <state key="normal" title="Open in Spotify">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="openInSpotify:" destination="ub5-0r-fs4" eventType="touchUpInside" id="1Jt-pW-ilz"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" name="BoxColor"/>
-                            </view>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7nR-lr-S5x">
+                                <rect key="frame" x="16" y="513" width="378" height="332"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hhC-O8-9Ym">
+                                    <rect key="frame" x="0.0" y="0.0" width="378" height="332"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afg-rL-ksX">
+                                            <rect key="frame" x="10" y="90" width="90" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="90" id="5YK-cX-o7q"/>
+                                                <constraint firstAttribute="height" constant="28" id="ryv-2g-kpz"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" name="SubtitleColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eg5-vi-F3P">
+                                            <rect key="frame" x="10" y="65" width="358" height="28"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" name="SubtitleColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ca8-SQ-9y1">
+                                            <rect key="frame" x="10" y="33" width="358" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="28" id="7RL-bL-DFw"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcC-gb-nVJ">
+                                            <rect key="frame" x="12" y="136" width="144" height="38"/>
+                                            <color key="backgroundColor" red="0.43747270110000003" green="0.63128167390000001" blue="0.63137620689999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="144" id="C3A-0x-ZfN"/>
+                                                <constraint firstAttribute="height" constant="38" id="rt1-7d-skT"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                            <state key="normal" title="Open in Spotify">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="openInSpotify:" destination="ub5-0r-fs4" eventType="touchUpInside" id="1Jt-pW-ilz"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1F-7a-LeJ" customClass="ActionButton" customModule="Pop" customModuleProvider="target">
+                                            <rect key="frame" x="28" y="224" width="323" height="50"/>
+                                            <state key="normal" title="Favorite"/>
+                                            <connections>
+                                                <action selector="favoriteAction:" destination="ub5-0r-fs4" eventType="touchUpInside" id="aq7-Cc-Baj"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="qcC-gb-nVJ" firstAttribute="top" secondItem="afg-rL-ksX" secondAttribute="bottom" constant="18" id="3bB-Of-Ppu"/>
+                                        <constraint firstItem="ca8-SQ-9y1" firstAttribute="leading" secondItem="hhC-O8-9Ym" secondAttribute="leading" constant="10" id="5kr-EM-O0X"/>
+                                        <constraint firstItem="Eg5-vi-F3P" firstAttribute="leading" secondItem="afg-rL-ksX" secondAttribute="leading" id="7oZ-t4-aQF"/>
+                                        <constraint firstItem="ca8-SQ-9y1" firstAttribute="leading" secondItem="Eg5-vi-F3P" secondAttribute="leading" id="Bdf-ej-5GP"/>
+                                        <constraint firstAttribute="bottom" secondItem="W1F-7a-LeJ" secondAttribute="bottom" constant="58" id="DWl-Yt-i1c"/>
+                                        <constraint firstItem="ca8-SQ-9y1" firstAttribute="top" secondItem="hhC-O8-9Ym" secondAttribute="top" constant="33" id="FBL-f3-Af4"/>
+                                        <constraint firstItem="W1F-7a-LeJ" firstAttribute="leading" secondItem="hhC-O8-9Ym" secondAttribute="leading" constant="28" id="FHU-zK-eT6"/>
+                                        <constraint firstItem="afg-rL-ksX" firstAttribute="top" secondItem="ca8-SQ-9y1" secondAttribute="bottom" constant="29" id="IaS-hu-dAb"/>
+                                        <constraint firstItem="ca8-SQ-9y1" firstAttribute="trailing" secondItem="Eg5-vi-F3P" secondAttribute="trailing" id="JbW-eb-JcN"/>
+                                        <constraint firstItem="Eg5-vi-F3P" firstAttribute="top" secondItem="ca8-SQ-9y1" secondAttribute="bottom" constant="4" id="Ssl-NQ-x1V"/>
+                                        <constraint firstItem="Eg5-vi-F3P" firstAttribute="centerX" secondItem="W1F-7a-LeJ" secondAttribute="centerX" id="aR7-v0-Dbs"/>
+                                        <constraint firstItem="W1F-7a-LeJ" firstAttribute="top" secondItem="qcC-gb-nVJ" secondAttribute="bottom" constant="50" id="cym-i0-Hzh"/>
+                                        <constraint firstItem="qcC-gb-nVJ" firstAttribute="top" secondItem="Eg5-vi-F3P" secondAttribute="bottom" constant="43" id="eTB-nl-gJs"/>
+                                        <constraint firstItem="ca8-SQ-9y1" firstAttribute="centerX" secondItem="hhC-O8-9Ym" secondAttribute="centerX" id="jwb-gI-H7h"/>
+                                        <constraint firstItem="qcC-gb-nVJ" firstAttribute="leading" secondItem="hhC-O8-9Ym" secondAttribute="leading" constant="12" id="mRm-Ht-Ulv"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="W1F-7a-LeJ" firstAttribute="leading" secondItem="Q5B-mL-8ZR" secondAttribute="leading" constant="16" id="QK6-8h-gQh"/>
-                            <constraint firstItem="Q5B-mL-8ZR" firstAttribute="trailing" secondItem="W1F-7a-LeJ" secondAttribute="trailing" constant="16" id="sHm-v9-AdI"/>
-                            <constraint firstItem="Q5B-mL-8ZR" firstAttribute="bottom" secondItem="W1F-7a-LeJ" secondAttribute="bottom" id="tLY-Ch-oSr"/>
+                            <constraint firstItem="Q5B-mL-8ZR" firstAttribute="bottom" secondItem="7nR-lr-S5x" secondAttribute="bottom" constant="17" id="1Ck-CO-6nz"/>
+                            <constraint firstItem="aEJ-oa-mV9" firstAttribute="centerX" secondItem="3kr-mH-uT1" secondAttribute="centerX" id="Bin-b8-xnW"/>
+                            <constraint firstItem="7nR-lr-S5x" firstAttribute="leading" secondItem="Q5B-mL-8ZR" secondAttribute="leading" constant="16" id="LpB-It-4up"/>
+                            <constraint firstItem="aEJ-oa-mV9" firstAttribute="top" secondItem="3kr-mH-uT1" secondAttribute="topMargin" constant="-88" id="P83-nO-RBr"/>
+                            <constraint firstItem="aEJ-oa-mV9" firstAttribute="centerY" secondItem="3kr-mH-uT1" secondAttribute="centerY" id="bRg-dc-ZHB"/>
+                            <constraint firstItem="7nR-lr-S5x" firstAttribute="trailing" secondItem="3kr-mH-uT1" secondAttribute="trailingMargin" id="dSh-Xg-kNJ"/>
+                            <constraint firstItem="7nR-lr-S5x" firstAttribute="top" secondItem="Q5B-mL-8ZR" secondAttribute="top" constant="425" id="fKQ-Tn-3cQ"/>
+                            <constraint firstItem="aEJ-oa-mV9" firstAttribute="leading" secondItem="Q5B-mL-8ZR" secondAttribute="leading" id="hCf-dZ-Ydr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Q5B-mL-8ZR"/>
                     </view>
@@ -352,7 +380,7 @@
                         <outlet property="artistLabel" destination="Eg5-vi-F3P" id="8Fm-Pt-dYk"/>
                         <outlet property="durationLabel" destination="afg-rL-ksX" id="XSY-qo-yxw"/>
                         <outlet property="favoriteButton" destination="W1F-7a-LeJ" id="HZe-Le-0X2"/>
-                        <outlet property="metadataView" destination="xj2-fv-o4M" id="7C9-n3-aGH"/>
+                        <outlet property="metadataView" destination="7nR-lr-S5x" id="GU7-UO-vKN"/>
                         <outlet property="playerView" destination="aEJ-oa-mV9" id="gRe-PA-5oN"/>
                         <outlet property="titleLabel" destination="ca8-SQ-9y1" id="b6Z-hu-keH"/>
                     </connections>
@@ -603,7 +631,7 @@
             <objects>
                 <navigationController storyboardIdentifier="TrackVC" automaticallyAdjustsScrollViewInsets="NO" id="Tdp-sQ-TrQ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kpU-A3-HcK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="kpU-A3-HcK">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -627,16 +655,13 @@
         <image name="placeholder-album" width="333" height="333"/>
         <image name="star.fill" catalog="system" width="64" height="58"/>
         <namedColor name="Background">
-            <color red="0.9882352941176471" green="0.9882352941176471" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="BoxColor">
-            <color red="0.96862745100000003" green="0.96078431369999995" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.98799997568130493" green="0.98799997568130493" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Dark">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="SubtitleColor">
-            <color red="0.22355503110314501" green="0.22224769173996872" blue="0.22486237046632129" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.22400000691413879" green="0.22200000286102295" blue="0.22499999403953552" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
     <color key="tintColor" name="Dark"/>
