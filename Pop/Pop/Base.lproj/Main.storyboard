@@ -398,7 +398,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="UFH-CB-tOS">
-                                            <rect key="frame" x="32" y="478.5" width="350" height="40"/>
+                                            <rect key="frame" x="32" y="482" width="350" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="mny-r7-gc1"/>
                                             </constraints>
@@ -407,7 +407,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epH-HZ-hca">
-                                            <rect key="frame" x="32" y="519.5" width="41.5" height="20.5"/>
+                                            <rect key="frame" x="32" y="523" width="41.5" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" name="SubtitleColor"/>
                                             <nil key="highlightedColor"/>
@@ -420,7 +420,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-album" translatesAutoresizingMaskIntoConstraints="NO" id="tJt-kz-YbH">
-                                            <rect key="frame" x="0.0" y="49" width="414" height="414.5"/>
+                                            <rect key="frame" x="0.0" y="49" width="414" height="418"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -601,7 +601,6 @@
         <!--Navigation Controller-->
         <scene sceneID="QEj-Jb-OqW">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y81-RF-GZ5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="TrackVC" automaticallyAdjustsScrollViewInsets="NO" id="Tdp-sQ-TrQ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kpU-A3-HcK">
@@ -613,6 +612,7 @@
                         <segue destination="ub5-0r-fs4" kind="relationship" relationship="rootViewController" id="Jqx-Ca-1k2"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y81-RF-GZ5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2866.666666666667" y="839.73214285714278"/>
         </scene>

@@ -30,28 +30,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     func configureSearchController() {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        // 2
         searchController.obscuresBackgroundDuringPresentation = false
-        // 3
         searchController.searchBar.placeholder = "Search"
-        // searchController.automaticallyShowsCancelButton = false
-        
-        // 4
         navigationItem.searchController = searchController
-        // 5
         definesPresentationContext = true
+        
     }
     
     func search(query: String) {
         
         // Clear old results
         
-        self.albumResults.removeAll()
-        self.artistResults.removeAll()
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
-        }
+        clearResults()
         
         print("Searching for: \(query)")
         
@@ -63,6 +53,15 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchAlbums(query: query)
         searchArtists(query: query)
         
+    }
+    
+    func clearResults() {
+        self.albumResults.removeAll()
+        self.artistResults.removeAll()
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
+        }
     }
     
     func searchAlbums(query: String) {
@@ -199,7 +198,6 @@ extension SearchViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SearchCell
         
         if indexPath.section == 0 {
-            
             let album = albumResults[indexPath.row]
             cell.setup(album: album)
             

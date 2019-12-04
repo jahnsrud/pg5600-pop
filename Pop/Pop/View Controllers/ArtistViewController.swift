@@ -57,7 +57,6 @@ class ArtistViewController: UIViewController {
                     let response = try JSONDecoder().decode(AlbumSearchResponse.self, from: jsonData)
                     
                     for album in response.album! {
-                        print("Album: \(album.title)")
                         self.albums.append(album)
                         
                     }
