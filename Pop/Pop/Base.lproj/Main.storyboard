@@ -250,10 +250,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="YQ8-1f-RXw" firstAttribute="centerX" secondItem="YdK-SG-8M3" secondAttribute="centerX" id="9TX-os-M47"/>
-                            <constraint firstItem="YQ8-1f-RXw" firstAttribute="centerY" secondItem="YdK-SG-8M3" secondAttribute="centerY" id="ebJ-BZ-ULW"/>
-                            <constraint firstItem="YQ8-1f-RXw" firstAttribute="leading" secondItem="z2H-er-vwV" secondAttribute="leading" id="gA8-aj-afz"/>
-                            <constraint firstItem="YQ8-1f-RXw" firstAttribute="top" secondItem="YdK-SG-8M3" secondAttribute="topMargin" constant="-88" id="hpE-zm-gT0"/>
+                            <constraint firstItem="YQ8-1f-RXw" firstAttribute="centerX" secondItem="z2H-er-vwV" secondAttribute="centerX" id="7y4-nc-v46"/>
+                            <constraint firstItem="YQ8-1f-RXw" firstAttribute="bottom" secondItem="z2H-er-vwV" secondAttribute="bottom" constant="34" id="UOz-qO-FiW"/>
+                            <constraint firstItem="YQ8-1f-RXw" firstAttribute="width" secondItem="YdK-SG-8M3" secondAttribute="width" id="qyT-RP-NDo"/>
+                            <constraint firstItem="z2H-er-vwV" firstAttribute="top" secondItem="YQ8-1f-RXw" secondAttribute="top" constant="88" id="t9P-tL-Vrb"/>
+                            <constraint firstItem="z2H-er-vwV" firstAttribute="trailing" secondItem="YQ8-1f-RXw" secondAttribute="trailing" id="tv6-LQ-pVU"/>
+                            <constraint firstItem="YQ8-1f-RXw" firstAttribute="leading" secondItem="z2H-er-vwV" secondAttribute="leading" id="w7l-CM-XaU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="z2H-er-vwV"/>
                     </view>
