@@ -99,15 +99,15 @@ class TrackViewController: UIViewController {
                         let player = AVPlayer(url: streamURL)
                         player.play()
                         
+                        // Creates an AVPlayerViewController that fills the whole view
                         let playerViewController = AVPlayerViewController()
                         playerViewController.view.frame = self.playerView.frame
                         playerViewController.videoGravity = .resizeAspectFill
                         playerViewController.showsPlaybackControls = false
                         playerViewController.player = player
-                        
-                        // TODO: IMPROVE :)
-                        
                         self.addChild(playerViewController)
+                        
+                        // Adds our video and sends it to the back of playerView.
                         self.playerView.addSubview(playerViewController.view)
                         self.playerView.sendSubviewToBack(playerViewController.view)
                         playerViewController.didMove(toParent: self)
@@ -119,10 +119,6 @@ class TrackViewController: UIViewController {
                 }
             }
             
-        } else {
-            
-            
-            
         }
         
     }
@@ -131,10 +127,8 @@ class TrackViewController: UIViewController {
         
         if trackIsFavorited() {
             promptDeletionOfFavorite(favorite)
-            
         } else {
             addTrackToDatabase()
-            
         }
         
     }
