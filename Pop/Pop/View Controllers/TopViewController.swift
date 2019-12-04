@@ -18,6 +18,8 @@ class TopViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var layoutBarButtonItem: UIBarButtonItem!
     
+    var refreshControl = UIRefreshControl()
+    
     var albums = [Album]()
     
     var layoutType = Layout.grid
@@ -42,6 +44,19 @@ class TopViewController: UIViewController {
         collectionView.register(UINib(nibName: "AlbumGridCell", bundle: nil), forCellWithReuseIdentifier: "GridCell")
         collectionView.register(UINib(nibName: "AlbumListCell", bundle: nil), forCellWithReuseIdentifier: "ListCell")
         
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+        
+        
+    }
+    
+    @objc func refresh() {
+        
+        albums.removeAll()
+        self.collectionView.reloadData(animated: true)
+        
+        getTopAlbums()
+        
     }
     
     func checkFirstLaunch() {
@@ -57,6 +72,8 @@ class TopViewController: UIViewController {
     }
     
     func getTopAlbums() {
+        
+        refreshControl.beginRefreshing()
         
         let url = "\(musicApiBaseUrl)mostloved.php?format=album"
         
@@ -87,6 +104,12 @@ class TopViewController: UIViewController {
             
         })
         
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+            
+        }
+        
+        
         
     }
     
@@ -112,7 +135,7 @@ class TopViewController: UIViewController {
         }, completion: { _ in
             
             UIView.animate(withDuration: 0.1, animations: {
-                       self.collectionView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.collectionView.transform = CGAffineTransform(scaleX: 1, y: 1)
             }, completion: nil)})
         
         

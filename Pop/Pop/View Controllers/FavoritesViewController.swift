@@ -230,26 +230,32 @@ class FavoritesViewController: UIViewController {
     }
     
     func displaySuggestions(_ shouldDisplay: Bool) {
-           
-           var constant = 0
-           
-           if shouldDisplay {
-               constant = 520
-               
-               suggestionDescriptionLabel.text = "SUGGESTIONS"
-               
-           } else {
-               constant = 630
-               suggestionDescriptionLabel.text = "Add favorites, and we'll suggest new artists 🎤"
-           }
-           
-           UIView.animate(withDuration: 0.35, animations: { () -> Void in
-               self.tableViewHeightConstraint.constant = CGFloat(constant)
-               self.view.layoutIfNeeded()
-           })
-           
-       }
-       
+        
+        var constant = 0
+        
+        if shouldDisplay {
+                
+            constant = 520
+            
+            // Workaround for smaller screens
+            if view.bounds.size.width >= 320 && view.bounds.size.width < 380 {
+                constant = 320
+            }
+            
+            suggestionDescriptionLabel.text = "SUGGESTIONS"
+            
+        } else {
+            constant = 630
+            suggestionDescriptionLabel.text = "Add favorites, and we'll suggest new artists 🎤"
+        }
+        
+        UIView.animate(withDuration: 0.35, animations: { () -> Void in
+            self.tableViewHeightConstraint.constant = CGFloat(constant)
+            self.view.layoutIfNeeded()
+        })
+        
+    }
+    
     
     
 }
@@ -305,7 +311,7 @@ extension FavoritesViewController: UITableViewDelegate {
         
     }
     
-
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return favorites.count > 0 ? "Tracks" : ""
     }
