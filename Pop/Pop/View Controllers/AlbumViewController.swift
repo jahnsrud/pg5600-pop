@@ -40,6 +40,8 @@ class AlbumViewController: UIViewController {
         albumTitleLabel.text = album?.title
         artistLabel.text = album?.artist
         yearLabel.text = album?.yearReleased
+        yearLabel.layer.cornerRadius = 4
+        yearLabel.layer.masksToBounds = true
         
         if let albumArtUrl = album?.albumArtUrl {
             let url = URL(string: albumArtUrl)
