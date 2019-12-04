@@ -272,7 +272,7 @@
         <!--Track View Controller-->
         <scene sceneID="VWx-PT-LOL">
             <objects>
-                <viewController id="ub5-0r-fs4" customClass="TrackViewController" customModule="Pop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController interfaceStyle="dark" id="ub5-0r-fs4" customClass="TrackViewController" customModule="Pop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3kr-mH-uT1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -10,6 +10,7 @@ import UIKit
 import XCDYouTubeKit
 import CoreData
 import AVKit
+import Kingfisher
 
 class TrackViewController: UIViewController {
     
@@ -56,15 +57,28 @@ class TrackViewController: UIViewController {
     func startVideo() {
         
         if var videoUrl = track?.videoUrl {
-
+            
+            if videoUrl.count == 0 {
+                let imageView = UIImageView(frame: self.playerView.frame)
+                                 imageView.backgroundColor = .black
+                                 self.playerView.addSubview(imageView)
+                                 self.playerView.sendSubviewToBack(imageView)
+                                 imageView.kf.setImage(with: URL(string: self.track?.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
+                
+                return
+                
+                
+            }
+            
             videoUrl = videoUrl.replacingOccurrences(of: "http://", with: "https://")
             let videoId = videoUrl.replacingOccurrences(of: "https://www.youtube.com/watch?v=", with: "")
+            
             
             XCDYouTubeClient.default().getVideoWithIdentifier(videoId) { [weak self] (video, error) in
                 
                 if video != nil {
                     let streamURLs = video?.streamURLs
-                    let streamURL = streamURLs?[XCDYouTubeVideoQualityHTTPLiveStreaming] ?? streamURLs?[NSNumber(value: XCDYouTubeVideoQuality.medium360.rawValue)] ?? streamURLs?[NSNumber(value: XCDYouTubeVideoQuality.small240.rawValue)]
+                    let streamURL = streamURLs?[XCDYouTubeVideoQualityHTTPLiveStreaming] ?? streamURLs?[NSNumber(value: XCDYouTubeVideoQuality.HD720.rawValue)] ?? streamURLs?[NSNumber(value: XCDYouTubeVideoQuality.medium360.rawValue)]
                     if let streamURL = streamURL {
                         
                         let player = AVPlayer(url: streamURL)
@@ -87,13 +101,15 @@ class TrackViewController: UIViewController {
                         
                     }
                     
-                } else {
-                    self?.dismiss(animated: true)
                 }
             }
             
+        } else {
+            
+            
+            
         }
-     
+        
     }
     
     @IBAction func favoriteAction(_ sender: Any) {
