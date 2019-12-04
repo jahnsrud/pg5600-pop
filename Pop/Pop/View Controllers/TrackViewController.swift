@@ -18,29 +18,34 @@ class TrackViewController: UIViewController {
     private var favorite: Favorite?
     
     @IBOutlet weak var playerView: UIView!
+    @IBOutlet weak var spotifyButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
     
     @IBOutlet weak var metadataView: UIVisualEffectView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        overrideUserInterfaceStyle = .dark
-        
+        setUI()
         displayTrack()
+
+        
+    }
+    
+    func setUI() {
+        overrideUserInterfaceStyle = .dark
         metadataView.layer.cornerRadius = 4
         metadataView.layer.masksToBounds = true
+        spotifyButton.layer.cornerRadius = 4
     }
     
     func displayTrack() {
         
-        title = ""
+        title = track?.artist
         
         titleLabel.text = track?.name
-        artistLabel.text = track?.artist
         
         if let intDuration = Int(track?.duration ?? "") {
             durationLabel.text = intDuration.convertMillisecondsToHumanReadable()
@@ -60,10 +65,12 @@ class TrackViewController: UIViewController {
             
             if videoUrl.count == 0 {
                 let imageView = UIImageView(frame: self.playerView.frame)
-                                 imageView.backgroundColor = .black
-                                 self.playerView.addSubview(imageView)
-                                 self.playerView.sendSubviewToBack(imageView)
-                                 imageView.kf.setImage(with: URL(string: self.track?.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
+                imageView.backgroundColor = .black
+                imageView.contentMode = .scaleAspectFill
+                
+                self.playerView.addSubview(imageView)
+                self.playerView.sendSubviewToBack(imageView)
+                imageView.kf.setImage(with: URL(string: self.track?.albumArtUrl ?? ""), placeholder: UIImage(named: "placeholder-album"))
                 
                 return
                 
@@ -74,7 +81,7 @@ class TrackViewController: UIViewController {
             let videoId = videoUrl.replacingOccurrences(of: "https://www.youtube.com/watch?v=", with: "")
             
             
-            XCDYouTubeClient.default().getVideoWithIdentifier(videoId) { [weak self] (video, error) in
+            XCDYouTubeClient.default().getVideoWithIdentifier(videoId) { (video, error) in
                 
                 if video != nil {
                     let streamURLs = video?.streamURLs
@@ -85,16 +92,16 @@ class TrackViewController: UIViewController {
                         player.play()
                         
                         let playerViewController = AVPlayerViewController()
-                        playerViewController.view.frame = self!.playerView.frame
+                        playerViewController.view.frame = self.playerView.frame
                         playerViewController.videoGravity = .resizeAspectFill
                         playerViewController.showsPlaybackControls = false
                         playerViewController.player = player
                         
                         // TODO: IMPROVE :)
                         
-                        self!.addChild(playerViewController)
-                        self!.playerView.addSubview(playerViewController.view)
-                        self!.playerView.sendSubviewToBack(playerViewController.view)
+                        self.addChild(playerViewController)
+                        self.playerView.addSubview(playerViewController.view)
+                        self.playerView.sendSubviewToBack(playerViewController.view)
                         playerViewController.didMove(toParent: self)
                         
                         
