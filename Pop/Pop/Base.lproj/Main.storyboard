@@ -247,7 +247,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YQ8-1f-RXw">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="16" minimumInteritemSpacing="0.0" id="6P1-lG-bj1">
                                     <size key="itemSize" width="150" height="150"/>
@@ -272,7 +272,7 @@
                             <constraint firstItem="YQ8-1f-RXw" firstAttribute="centerX" secondItem="z2H-er-vwV" secondAttribute="centerX" id="7y4-nc-v46"/>
                             <constraint firstItem="YQ8-1f-RXw" firstAttribute="bottom" secondItem="z2H-er-vwV" secondAttribute="bottom" constant="34" id="UOz-qO-FiW"/>
                             <constraint firstItem="YQ8-1f-RXw" firstAttribute="width" secondItem="YdK-SG-8M3" secondAttribute="width" id="qyT-RP-NDo"/>
-                            <constraint firstItem="z2H-er-vwV" firstAttribute="top" secondItem="YQ8-1f-RXw" secondAttribute="top" constant="88" id="t9P-tL-Vrb"/>
+                            <constraint firstItem="z2H-er-vwV" firstAttribute="top" secondItem="YQ8-1f-RXw" secondAttribute="top" id="t9P-tL-Vrb"/>
                             <constraint firstItem="z2H-er-vwV" firstAttribute="trailing" secondItem="YQ8-1f-RXw" secondAttribute="trailing" id="tv6-LQ-pVU"/>
                             <constraint firstItem="YQ8-1f-RXw" firstAttribute="leading" secondItem="z2H-er-vwV" secondAttribute="leading" id="w7l-CM-XaU"/>
                         </constraints>

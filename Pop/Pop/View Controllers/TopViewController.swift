@@ -27,7 +27,9 @@ class TopViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = UIColor(named: "Background")
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.navigationItem.largeTitleDisplayMode = .always
+        
         
         configureCollectionView()
         checkFirstLaunch()
@@ -73,7 +75,7 @@ class TopViewController: UIViewController {
     
     func getTopAlbums() {
         
-        refreshControl.beginRefreshing()
+        //refreshControl.beginRefreshing()
         
         let url = "\(musicApiBaseUrl)mostloved.php?format=album"
         
