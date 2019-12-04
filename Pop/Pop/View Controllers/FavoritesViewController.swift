@@ -89,6 +89,9 @@ class FavoritesViewController: UIViewController {
             DatabaseManager.persistentContainer.viewContext.delete(favorite)
             DatabaseManager.saveContext()
             
+            let hapticFeedback = UINotificationFeedbackGenerator()
+            hapticFeedback.notificationOccurred(.success)
+            
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

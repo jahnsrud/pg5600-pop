@@ -39,6 +39,15 @@ class TrackViewController: UIViewController {
         metadataView.layer.cornerRadius = 4
         metadataView.layer.masksToBounds = true
         spotifyButton.layer.cornerRadius = 4
+        
+        if !canOpenSpotify() {
+            spotifyButton.isHidden = true
+        }
+        
+    }
+    
+    func canOpenSpotify() -> Bool {
+           return UIApplication.shared.canOpenURL(URL(string: "spotify://")!)
     }
     
     func displayTrack() {
@@ -132,8 +141,14 @@ class TrackViewController: UIViewController {
     }
     
     @IBAction func openInSpotify(_ sender: Any) {
+                
+        // Making the query URL-friendly
+        let searchQuery = "\(track?.name ?? "") \(track?.artist ?? "")".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)?.lowercased()
         
-        UIApplication.shared.open(URL(string: "spotify://")!, options: [:], completionHandler: nil)
+        // Opens the Spotify app directly with search
+        let openURL = "spotify://search/\(searchQuery!)"
+        
+        UIApplication.shared.open(URL(string: openURL)!, options: [:], completionHandler: nil)
         
     }
     
@@ -152,6 +167,10 @@ class TrackViewController: UIViewController {
         DatabaseManager.saveContext()
         
         displayFavoritedStatus()
+        
+        let hapticFeedback = UINotificationFeedbackGenerator()
+        hapticFeedback.notificationOccurred(.success)
+        
         
     }
     
@@ -208,6 +227,9 @@ class TrackViewController: UIViewController {
                 DatabaseManager.saveContext()
                 
                 self.displayFavoritedStatus()
+                
+                let hapticFeedback = UINotificationFeedbackGenerator()
+                hapticFeedback.notificationOccurred(.success)
                 
             }))
             
