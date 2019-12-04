@@ -147,6 +147,10 @@ extension AlbumViewController: UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(10)
+    }
+    
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         
         if tracks.count > 0 {
