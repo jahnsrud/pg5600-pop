@@ -83,7 +83,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
                     
                     if response.album != nil {
                         for album in response.album! {
-                            print("Found album: \(album.title)")
                             self.albumResults.append(album)
                         }
                     } else {
@@ -125,7 +124,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
                     
                     if response.artists != nil {
                         for artist in response.artists! {
-                            print("Found artist: \(artist.name) with \(artist.imageUrl)")
                             self.artistResults.append(artist)
                         }
                     } else {

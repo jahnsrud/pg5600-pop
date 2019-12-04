@@ -146,8 +146,21 @@ extension AlbumViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if tracks.count > 0 {
+            return "Tracks (\(tracks.count))"
+        }
+        return ""
+        
+    }
+    
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return album?.genre
+        
+        if tracks.count > 0 {
+            return album?.genre
+        }
+        
+        return ""
     }
     
     
