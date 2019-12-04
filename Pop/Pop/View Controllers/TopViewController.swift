@@ -107,7 +107,7 @@ class TopViewController: UIViewController {
         updateLayout()
         
         UIView.animate(withDuration: 0.1, animations: {
-            self.collectionView.transform = CGAffineTransform(scaleX: 0.94, y: 0.94)
+            self.collectionView.transform = CGAffineTransform(scaleX: 0.96, y: 0.96)
             
         }, completion: { _ in
             
