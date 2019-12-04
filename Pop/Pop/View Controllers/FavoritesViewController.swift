@@ -238,7 +238,7 @@ class FavoritesViewController: UIViewController {
             constant = 520
             
             // Workaround for smaller screens
-            if view.bounds.size.width >= 320 && view.bounds.size.width < 380 {
+            if view.bounds.size.width >= 320 && view.bounds.size.width < 375 {
                 constant = 320
             }
             
