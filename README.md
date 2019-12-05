@@ -9,7 +9,7 @@ Candidate #5028
 
 ## What is Pop?
 
-A place to discover music. The app shows you the top 50 albums of all time. You can browse music, along with storing your favorites. The data is provided by TheAudioDB. Suggestions are provided by Tastedive. 
+A place to discover music. The app shows you the top 50 albums of all time. You can browse music, along with saving your favorites. The data is provided by TheAudioDB. Suggestions are provided by Tastedive. 
 
 ## Solution
 
@@ -41,7 +41,7 @@ The app covers all requirements from the task. I have used Core Data to persist 
 I have used two libraries in the exam. All installed with SPM (Swift Package Manager).
 
 | Library        | Version      | Description  |
-| ------------- |-------------|-----|
+| :------------- |:-------------|:-----|
 | Kingfisher   | 5.9.0 | Image Caching |
 | XCDYouTubeKit  | 2.8.2     |   Embedded YouTube videos |
 
