@@ -40,7 +40,7 @@ class TrackViewController: UIViewController {
         spotifyButton.layer.cornerRadius = 4
         
         if !canOpenSpotify() {
-            spotifyButton.isHidden = true
+           // spotifyButton.isHidden = true
         }
         
     }
