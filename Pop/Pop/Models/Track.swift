@@ -35,10 +35,8 @@ struct TracksResponse: Codable {
 
 extension Favorite {
     func toTrack() -> Track {
-        
-        // TODO: FIX Don't unwrap
-        
-        /* guard let favoriteTrack = favorite.track else {
+    
+        /* guard __ else {
          
          } */
         
