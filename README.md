@@ -1,7 +1,8 @@
-![pop](https://user-images.githubusercontent.com/4276097/70192635-abe98900-16fc-11ea-9d33-714fd03a5deb.png)
+![pop](https://user-images.githubusercontent.com/4276097/70216662-4a4b0e00-1740-11ea-8382-543dcd9b3ee6.png)
 
 # Pop for iOS
-Exam in PG5600: iOS Programming
+My exam in PG5600: iOS Programming at Høyskolen Kristiania.
+
 Candidate #5028
 
 ## Test
@@ -31,8 +32,13 @@ Tried to use the newest technologies possible, not constrained to old.
 
 ## Libraries
 
-Kingfisher
-XCDYouTubeKit
+I have used a few libraries in the exam. All with Swift Package Manager.
+
+| Library        | Version      | Description  |
+| ------------- |-------------|-----|
+| Kingfisher   | 5.9.0 | Image Caching |
+| XCDYouTubeKit  | 2.8.2     |   Embedded YouTube videos |
+
 
 * Vis til artikler med sammenligning av ytelse
 * Erfaring med SDWebImage tidligere
@@ -40,3 +46,4 @@ XCDYouTubeKit
 * God på caching, placeholder
 
 
+https://github.com/kean/Nuke
