@@ -5,11 +5,17 @@ My exam in PG5600: iOS Programming at Høyskolen Kristiania.
 
 Candidate #5028
 
-## Test
+[📽 See video](https://youtu.be/N65Q7FBs5nw)
 
-Made a concept.
+## What is Pop?
 
-Tried to use the newest technologies possible, not constrained to old.
+A place to discover music. The app shows you the top 50 albums of all time. You can browse music, along with storing your favorites. The data is provided by TheAudioDB. Suggestions are provided by Tastedive. 
+
+## Solution
+
+For this exam, I wanted to go all in iOS 13 and leaving old APIs behind. Just because I had the possibility to try that. I tried to make Pop into a concept.  
+
+The app covers all requirements from the task. I have used Core Data to persist the user's favorited tracks. 
 
 
 ### Extra functionality
@@ -17,7 +23,6 @@ Tried to use the newest technologies possible, not constrained to old.
 * Dark Mode
 * Empty State
 * First Launch experience
-* Highlight UICollectionView cells
 * YouTube integration
 * Haptic Feedback using UINotificationFeedbackGenerator
 * Keyboard handling
@@ -27,23 +32,28 @@ Tried to use the newest technologies possible, not constrained to old.
 * Support for browsing suggested artists (not only displaying)
 * Color asset catalogs
 * Pull to refresh
+* Highlight UICollectionView cells on tap
 * User Defaults Defaults
 
 
 ## Libraries
 
-I have used a few libraries in the exam. All with Swift Package Manager.
+I have used two libraries in the exam. All installed with SPM (Swift Package Manager).
 
 | Library        | Version      | Description  |
 | ------------- |-------------|-----|
 | Kingfisher   | 5.9.0 | Image Caching |
 | XCDYouTubeKit  | 2.8.2     |   Embedded YouTube videos |
 
+I've used Kingfisher for remote image handling. It's of course possible to implement image handling manually, but the library is incredibly good and quite lightweight.
 
-* Vis til artikler med sammenligning av ytelse
-* Erfaring med SDWebImage tidligere
-* Trenger ikke finne opp hjulet på nytt
-* God på caching, placeholder
+Good performance. Don't need to reinvent the wheel. Good for caching and placeholder. 
+
+Strange that there isn't a native API for this yet. 
+
+XCDYouTubeKit was a great way to get a YouTube video's URL. It would probably be rejected by Apple because it is [against YouTube's Terms of Service.](https://github.com/0xced/XCDYouTubeKit#warning)
 
 
-https://github.com/kean/Nuke
+## Screenshots
+
+
